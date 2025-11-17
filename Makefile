@@ -6,8 +6,10 @@ YELLOW      = \033[0;33m
 NC          = \033[0m
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -O3
+CFLAGS      = -Wall -Wextra -Werror
 INCLUDE     = -I libft/srcs/includes -I include
+
+RDFLAGS		= -lreadline -ltermcap -lncurses
 
 RM          = rm -rf
 RUNLIB      = -C libft
@@ -33,7 +35,7 @@ LIBFT = libft/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFT) $(RDFLAGS) -o $(NAME)
 	@printf "$(GREEN)🎉 Executable $(NAME) successfully created!$(NC)\n"
 
 # Compile object files

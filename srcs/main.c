@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/17 17:19:09 by kamys            ###   ########.fr       */
+/*   Updated: 2025/11/17 18:40:59 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@ int	main(int argc, char **argv)
 {
 	char	*line;
 
-	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
+	setup_sig();
 	if (isatty(STDIN_FILENO))
 	{
 		while (1)
 		{
-			if (get_singal() == SIGINT)
-				reset_signal();
-			ft_putstr_fd("> ", 1);
-			line = get_next_line(STDIN_FILENO);
+			line = readline("> ");
 			if (!line)
 				break ;
-			if (!ft_strncmp(line, "exit\n", 5))
+			if (*line)
+				add_history(line);
+			if (!ft_strncmp(line, "exit", 5))
 			{
 				free(line);
 				break ;				
@@ -41,8 +38,10 @@ int	main(int argc, char **argv)
 	{
 		if (argc >= 2)
 			if (!ft_strncmp(argv[1], "-c", 2))
-				printf("argumento -> %s\n", argv[2]);
+				printf("algum dia vai começar a executar -> %s\n", argv[2]);
 	}
+	rl_clear_history();
+	rl_cleanup_after_signal();
 	printf("exit\n");
 	return (0);
 }

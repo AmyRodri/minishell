@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/17 17:19:24 by kamys            ###   ########.fr       */
+/*   Updated: 2025/11/17 18:31:52 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@
 # include <signal.h>
 # include <unistd.h>
 # include <string.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 
 // signal.c
 int		get_singal(void);
 void	reset_signal(void);
 void	handler(int sig);
+void	setup_sig(void);
 
 #endif

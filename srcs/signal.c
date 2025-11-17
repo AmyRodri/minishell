@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 16:54:01 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/17 17:20:00 by kamys            ###   ########.fr       */
+/*   Updated: 2025/11/17 18:31:46 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ void	reset_signal(void)
 
 void	handler(int sig)
 {
-	g_signal_status = sig;
-	ft_putstr_fd("\n> ", 1);
+    if (sig == SIGINT)
+    {
+        g_signal_status = SIGINT;
+        write(1, "\n", 1);
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
+    }
+}
+
+void	setup_sig(void)
+{
+	signal(SIGINT, handler);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }
