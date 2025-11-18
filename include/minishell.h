@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/18 14:14:39 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:25:48 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,23 @@ typedef struct s_env
 
 typedef struct s_env_table
 {
-	t_env	*table;
+	t_env	**buckets;
 	size_t	size;
 } t_env_table;
 
 // signal.c
-int		get_singal(void);
-void	reset_signal(void);
-void	handler(int sig);
-void	setup_sig(void);
+int				get_singal(void);
+void			reset_signal(void);
+void			handler(int sig);
+void			setup_sig(void);
+
+// env.c
+unsigned long	hash(char *str);
+t_env_table 	*env_init(size_t size);
+t_env			*env_new(char *key, char *value);
+void			env_set(t_env_table *table, char *key, char *value);
+void			load_env(t_env_table *table, char **envp);
+char			**env_to_envp(t_env_table *table);
+
 
 #endif

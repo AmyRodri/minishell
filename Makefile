@@ -20,7 +20,8 @@ OBJDIR      = objs
 
 # Source files
 SRCS 		= main.c		\
-			  signal.c		
+			  signal.c		\
+			  env.c		
 
 # Add directory prefix
 SRCS := $(addprefix $(SRCSDIR)/, $(SRCS))

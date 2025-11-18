@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/17 18:40:59 by kamys            ###   ########.fr       */
+/*   Updated: 2025/11/18 16:33:28 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
+	t_env_table	*env = env_init(97);
 
+	load_env(env, envp);
 	setup_sig();
 	if (isatty(STDIN_FILENO))
 	{
@@ -26,6 +28,12 @@ int	main(int argc, char **argv)
 				break ;
 			if (*line)
 				add_history(line);
+			if (!ft_strncmp(line, "env", 4))
+			{
+				char **new_env = env_to_envp(env);
+				for (size_t i = 0; new_env[i]; i++)
+					printf("%s\n",	new_env[i]);
+			}
 			if (!ft_strncmp(line, "exit", 5))
 			{
 				free(line);
