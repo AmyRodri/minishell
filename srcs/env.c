@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:06:00 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/11/18 16:31:15 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/11/19 13:50:04 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	env_set(t_env_table *table, char *key, char *value)
 {
 	unsigned long	idx;
 	t_env			*curr;
+	t_env			*new;
 	
 	idx = hash(key) % table->size;
 	curr = table->buckets[idx];
@@ -68,9 +69,52 @@ void	env_set(t_env_table *table, char *key, char *value)
 		}
 		curr = curr->next;
 	}
-	t_env	*new = env_new(key, value);
+	new = env_new(key, value);
 	new->next = table->buckets[idx];
 	table->buckets[idx] = new;
+}
+
+char	*env_get(t_env_table *table, char *key)
+{
+	unsigned long	idx;
+	t_env			*curr;
+	
+	idx = hash(key) % table->size;
+	curr = table->buckets[idx];
+	while (curr)
+	{
+		if (strcmp(curr->key, key) == 0)  // rebuild ft_strcmp
+			return (curr->value);
+		curr = curr->next;
+	}
+	return (NULL);
+}
+
+void	env_unset(t_env_table *table, char *key)
+{
+	unsigned long	idx;
+	t_env			*curr;
+	t_env			*prev;
+
+	idx = hash(key) % table->size;
+	curr = table->buckets[idx];
+	prev = NULL;
+	while (curr)
+	{
+		if (strcmp(curr->key, key))
+		{
+			if (prev)
+				prev->next = curr->next;
+			else
+				table->buckets[idx] = curr->next;
+			free(curr->key);
+			free(curr->value);
+			free(curr);
+			return ;			
+		}
+		prev = curr;
+		curr = curr->next;
+	}
 }
 
 void	load_env(t_env_table *table, char **envp)
