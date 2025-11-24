@@ -15,19 +15,27 @@ RM          = rm -rf
 RUNLIB      = -C libft
 
 # Directories
+ENVDIR      = env
 SRCSDIR     = srcs
 OBJDIR      = objs
 
 # Source files
 SRCS 		= main.c		\
-			  signal.c		\
-			  env.c		
+			  signal.c
+
+SRCS_ENV	= hash.c		\
+			  env_init.c	\
+			  env_new.c		\
+			  env_table.c	\
+			  env_export.c
+
+SRCS_ENV := $(addprefix $(SRCSDIR)/$(ENVDIR)/, $(SRCS_ENV))
 
 # Add directory prefix
-SRCS := $(addprefix $(SRCSDIR)/, $(SRCS))
+SRCS := $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV)
 
 # Object files
-OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
+OBJS = $(SRCS:$(SRCSDIR)/%.c=$(OBJDIR)/%.o)
 
 # Libs
 LIBFT = libft/libft.a
@@ -39,14 +47,11 @@ $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFT) $(RDFLAGS) -o $(NAME)
 	@printf "$(GREEN)🎉 Executable $(NAME) successfully created!$(NC)\n"
 
-# Compile object files
-$(OBJDIR)/%.o: $(SRCSDIR)/%.c | $(OBJDIR)
+# Compile object files (auto-create subfolders)
+$(OBJDIR)/%.o: $(SRCSDIR)/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@printf "$(YELLOW)⚙️ Compiling %s -> %s$(NC)\n" "$<" "$@"
-
-# Create objs folder if it doesn't exist
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
 
 # Compile libft silently
 $(LIBFT):

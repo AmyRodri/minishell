@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/19 14:24:32 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:24:12 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	t_env_table	*env = env_init(97);
+	t_env_table	*env = env_init(97, envp);
 
-	load_env(env, envp);
 	setup_sig();
 	if (isatty(STDIN_FILENO))
 	{
@@ -30,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 				add_history(line);
 			if (!ft_strncmp(line, "env", 4))
 			{
-				char **new_env = env_to_envp(env);
+				char **new_env = env_export(env);
 				for (size_t i = 0; new_env[i]; i++)
 					printf("%s\n",	new_env[i]);
 			}
@@ -50,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	rl_clear_history();
 	rl_cleanup_after_signal();
+	env_destroy(env);
 	printf("exit\n");
 	return (0);
 }

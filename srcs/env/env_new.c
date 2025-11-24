@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/24 15:18:12 by amyrodri         ###   ########.fr       */
+/*   Created: 2025/11/24 15:09:30 by amyrodri          #+#    #+#             */
+/*   Updated: 2025/11/24 15:09:43 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "env.h"
 
-# include "libft.h"
-# include "env.h"
-# include <stdio.h>
-# include <signal.h>
-# include <unistd.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+t_env	*env_new(char *key, char *value)
+{
+	t_env	*node;
 
-// signal.c
-int				get_singal(void);
-void			reset_signal(void);
-void			handler(int sig);
-void			setup_sig(void);
-
-#endif
+	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
+	node->key = ft_strdup(key);
+	node->value = ft_strdup(value);
+	node->next = NULL;
+	return (node);
+}

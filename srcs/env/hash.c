@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/24 15:18:12 by amyrodri         ###   ########.fr       */
+/*   Created: 2025/11/24 15:02:50 by amyrodri          #+#    #+#             */
+/*   Updated: 2025/11/24 15:05:10 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "env.h"
 
-# include "libft.h"
-# include "env.h"
-# include <stdio.h>
-# include <signal.h>
-# include <unistd.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+unsigned long	hash(char *str)
+{
+	unsigned long	hash;
+	int				c;
 
-// signal.c
-int				get_singal(void);
-void			reset_signal(void);
-void			handler(int sig);
-void			setup_sig(void);
-
-#endif
+	hash = 5381;
+	while(*str)
+	{
+		c = *str++;
+		hash = ((hash << 5) + hash) + c;
+	}
+	return (hash);
+}
