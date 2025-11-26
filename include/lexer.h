@@ -6,12 +6,14 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:30:19 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/25 19:33:17 by kamys            ###   ########.fr       */
+/*   Updated: 2025/11/25 21:39:41 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+# include "minishell.h"
 
 typedef enum s_token_type
 {
@@ -33,7 +35,12 @@ typedef struct s_token
 {
 	t_token_type	type;
 	char			*value;
+	struct s_token	*next;
 }	t_token;
+
+t_token	*lexer(const char *s);
+void	print_tokens(t_token *list);
+
 
 
 #endif
