@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:30:19 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/28 16:55:10 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/11/28 17:23:36 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_op
+{
+	char			*op;
+	t_token_type	type;
+}	t_op;
 
 // lexer_operetor.c
 t_token	*tokenize_operetor(const char *s, int *i);
