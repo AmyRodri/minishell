@@ -83,7 +83,8 @@ SRCS_PROMPT	= prompt_init.c			\
 
 SRCS_BUILT	= built_env.c		\
 			  built_cd.c		\
-			  built_export.c
+			  built_export.c	\
+			  built_unset.c
 
 # Add directory prefix
 SRCS_EXEC	:= $(addprefix $(SRCSDIR)/$(EXECDIR)/, $(SRCS_EXEC))
