@@ -19,6 +19,7 @@ RUNLIB		= -C libft
 # Directories
 BUILTDIR	= built_in
 PARSERDIR	= parser
+BUILTDIR	= built_in
 UTILSDIR	= utils
 LEXERDIR	= lexer
 ENVDIR		= env
@@ -69,6 +70,8 @@ SRCS_PROMPT	= prompt_init.c			\
 			  prompt_parser.c		\
 			  prompt_default.c
 
+SRCS_BUILT	= built_env.c
+
 # Add directory prefix
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
 
@@ -76,13 +79,15 @@ SRCS_PROMPT	:= $(addprefix $(SRCSDIR)/$(PROMPTDIR)/, $(SRCS_PROMPT))
 
 SRCS_PARSER	:= $(addprefix $(SRCSDIR)/$(PARSERDIR)/, $(SRCS_PARSER))
 
+SRCS_BUILT := $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
+
 SRCS_ENV	:= $(addprefix $(SRCSDIR)/$(ENVDIR)/, $(SRCS_ENV))
 
 SRCS_UTILS	:= $(addprefix $(SRCSDIR)/$(UTILSDIR)/, $(SRCS_UTILS))
 
 SRCS_LEXER	:= $(addprefix $(SRCSDIR)/$(LEXERDIR)/, $(SRCS_LEXER))
 
-SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_PROMPT)
+SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_PROMPT) $(SRCS_BUILT)
 
 # Object files
 OBJS		= $(SRCS:$(SRCSDIR)/%.c=$(OBJDIR)/%.o)
