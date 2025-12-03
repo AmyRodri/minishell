@@ -6,22 +6,11 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/28 15:18:27 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:29:20 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_env(t_env_table *env)
-{
-	char	**new_env;
-	size_t	i;
-
-	new_env = env_export(env);
-	i = 0;
-	while (new_env[i])
-		printf("%s\n", new_env[i++]);
-}
 
 void	input(char	*line, t_env_table	*env)
 {
