@@ -21,6 +21,7 @@ EXECDIR		= exec
 BUILTDIR	= built_in
 PROMPTDIR	= prompt
 PARSERDIR	= parser
+BUILTDIR	= built_in
 UTILSDIR	= utils
 LEXERDIR	= lexer
 ENVDIR		= env
@@ -80,6 +81,8 @@ SRCS_PROMPT	= prompt_init.c			\
 			  prompt_parser.c		\
 			  prompt_default.c
 
+SRCS_BUILT	= built_env.c
+
 # Add directory prefix
 SRCS_EXEC	:= $(addprefix $(SRCSDIR)/$(EXECDIR)/, $(SRCS_EXEC))
 
@@ -88,6 +91,8 @@ SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
 SRCS_PROMPT	:= $(addprefix $(SRCSDIR)/$(PROMPTDIR)/, $(SRCS_PROMPT))
 
 SRCS_PARSER	:= $(addprefix $(SRCSDIR)/$(PARSERDIR)/, $(SRCS_PARSER))
+
+SRCS_BUILT := $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
 
 SRCS_ENV	:= $(addprefix $(SRCSDIR)/$(ENVDIR)/, $(SRCS_ENV))
 
