@@ -23,36 +23,37 @@ SRCSDIR     = srcs
 OBJDIR      = objs
 
 # Source files
-SRCS 		= main.c		\
+SRCS 		= main.c			\
 			  signal.c
 
-SRCS_ENV	= hash.c		\
-			  env_init.c	\
-			  env_new.c		\
-			  env_table.c	\
+SRCS_ENV	= hash.c			\
+			  env_init.c		\
+			  env_new.c			\
+			  env_table.c		\
 			  env_export.c
 
-SRCS_UTILS	= ft_isspace.c	\
-			  ft_strcmp.c	\
+SRCS_UTILS	= ft_isspace.c		\
+			  ft_strcmp.c		\
   
-SRCS_LEXER	= lexer.c		\
+SRCS_LEXER	= lexer.c			\
 			  lexer_operetor.c	\
-			  lexer_word.c	\
+			  lexer_word.c		\
 			  lexer_utils.c 
 
-SRCS_BUILT	= built_env.c \
-			  built_cd.c
+SRCS_BUILT	= built_env.c		\
+			  built_cd.c		\
+			  built_export.c
 
 # Add directory prefix
-SRCS_BUILT := $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
+SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
 
-SRCS_ENV := $(addprefix $(SRCSDIR)/$(ENVDIR)/, $(SRCS_ENV))
+SRCS_ENV	:= $(addprefix $(SRCSDIR)/$(ENVDIR)/, $(SRCS_ENV))
 
-SRCS_UTILS := $(addprefix $(SRCSDIR)/$(UTILSDIR)/, $(SRCS_UTILS))
+SRCS_UTILS	:= $(addprefix $(SRCSDIR)/$(UTILSDIR)/, $(SRCS_UTILS))
 
-SRCS_LEXER := $(addprefix $(SRCSDIR)/$(LEXERDIR)/, $(SRCS_LEXER))
+SRCS_LEXER	:= $(addprefix $(SRCSDIR)/$(LEXERDIR)/, $(SRCS_LEXER))
 
-SRCS := $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT)
+SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT)
 
 # Object files
 OBJS = $(SRCS:$(SRCSDIR)/%.c=$(OBJDIR)/%.o)

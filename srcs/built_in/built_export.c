@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built.h                                            :+:      :+:    :+:   */
+/*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 13:00:29 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/03 16:34:31 by amyrodri         ###   ########.fr       */
+/*   Created: 2025/12/03 16:28:05 by amyrodri          #+#    #+#             */
+/*   Updated: 2025/12/03 16:37:53 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_H
-# define BUILT_H
+#include "built.h"
 
-# include <dirent.h>
-# include "minishell.h"
+void	export(t_env_table *env, char *key_value)
+{
+	char	**split;
+	char	*key;
+	char	*value;
 
-typedef struct s_env_table	t_env_table;
-
-void	print_env(t_env_table *env);
-void	cd(t_env_table *env, char *path);
-void	export(t_env_table *env, char *key_value);
-
-#endif
+	if (!key_value)
+	{
+		print_env(env);
+		return ;
+	}
+	split = ft_split(key_value, '=');
+	if (!split || !split[0] || !split[1])
+		return ;
+	key = split[0];
+	value = split[1];
+	env_set(env, key, value);
+}
