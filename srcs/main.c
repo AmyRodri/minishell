@@ -6,7 +6,7 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/03 16:51:31 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/03 18:35:43 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	input(char	*line, t_env_table	*env)
 		export(env, tmp[1]);
 	if (!ft_strcmp(tmp[0], "unset"))
 		unset(env, tmp[1]);
+	if (!ft_strcmp(tmp[0], "echo"))
+		echo(env, tmp[1], line);
 	if (!ft_strncmp(tmp[0], "exit", 5))
 	{
 		free(line);
@@ -39,6 +41,7 @@ void	input(char	*line, t_env_table	*env)
 		printf("exit\n");
 		exit(0);
 	}
+	printf("\n");
 }
 
 int	run_interactive_shell(t_env_table *env)

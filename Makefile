@@ -43,7 +43,8 @@ SRCS_LEXER	= lexer.c			\
 SRCS_BUILT	= built_env.c		\
 			  built_cd.c		\
 			  built_export.c	\
-			  built_unset.c
+			  built_unset.c		\
+			  built_echo.c
 
 # Add directory prefix
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))

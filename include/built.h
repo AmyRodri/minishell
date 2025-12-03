@@ -6,7 +6,7 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:00:29 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/03 16:49:08 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/03 18:24:19 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	print_env(t_env_table *env);
 void	cd(t_env_table *env, char *path);
 void	export(t_env_table *env, char *key_value);
 void	unset(t_env_table *env, char *key);
+void	echo(t_env_table *env, char *flag, char *line);
 
 #endif
