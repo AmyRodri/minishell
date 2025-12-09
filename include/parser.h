@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/09 14:14:22 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:38:03 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ typedef struct s_redir
 typedef struct s_token	t_token;
 
 void	parser(t_token *tokens);
+int		check_syntax(t_token *tokens);
 
 #endif

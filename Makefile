@@ -42,7 +42,8 @@ SRCS_LEXER	= lexer.c				\
 			  lexer_word.c			\
 			  lexer_utils.c 
 
-SRCS_PARSER = parser.c
+SRCS_PARSER = parser.c				\
+			  check_syntax.c 
 
 # Add directory prefix
 SRCS_PARSER	:= $(addprefix $(SRCSDIR)/$(PARSERDIR)/, $(SRCS_PARSER))
