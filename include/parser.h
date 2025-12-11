@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 05:23:10 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/11 05:27:06 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ t_ast						*parse_subshell(t_token **tokens);
 t_redir_type				redir_type(t_token_type type);
 t_ast						*parse_command(t_token **tokens);
 
-void						print_ast(t_ast *node, int depth);
 int							token_op(t_token_type token);
 int							check_in_end(t_token *start, t_token *end);
 int							check_inside(t_token *head, t_token *end);

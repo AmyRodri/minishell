@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:42:06 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 03:24:30 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/11 05:19:27 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ void	parser(t_token *tokens)
 	if (check_syntax(tokens))
 		return ;
 	ast = parse_sequence(&tokens);
-	print_ast(ast, 0);
 }

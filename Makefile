@@ -50,8 +50,7 @@ SRCS_PARSER = parser.c				\
 			  parse_or.c			\
 			  parse_pipe.c			\
 			  parse_sequence.c		\
-			  parse_subshell.c		\
-			  utils.c
+			  parse_subshell.c		
 
 # Add directory prefix
 SRCS_PARSER	:= $(addprefix $(SRCSDIR)/$(PARSERDIR)/, $(SRCS_PARSER))
