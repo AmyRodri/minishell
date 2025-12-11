@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 15:30:35 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:10:11 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,21 @@ void	free_ast(t_ast *root)
 void	input(char	*line, t_env_table	*env)
 {
 	t_token	*token;
-	t_ast	*ast;
+	t_ast	*ast_root;
+	char	**env_array;
+	int		exit_status;
 
 	token = lexer(line);
 	if (!token)
 		return ;
-	ast = parser(token);
-	if (!ast)
-		return ;
-	if (ast->type == NODE_CMD)
-		exec_built_in(env, (t_cmd *)ast->content);
-	free_ast(ast);
-	free_tokens(token);
+	// print_tokens(token);
+	ast_root = parser(token);
+	if (ast_root)
+	{
+		env_array = env_export(env);
+		exit_status = execute_ast(ast_root, env_array);
+		free_char_array(env_array);
+	}
 }
 
 int	run_interactive_shell(t_env_table *env)
