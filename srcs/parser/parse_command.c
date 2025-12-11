@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:16 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/11 04:42:00 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/11 04:45:54 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_redir	*redirs(t_token **tokens, t_token_type type)
 	t_redir			*redir;
 	t_redir_type	rtype;
 	t_redir			*r;
+
 	redir = NULL;
 	rtype = redir_type(type);
 	*tokens = (*tokens)->next;
@@ -45,7 +46,7 @@ t_redir	*redirs(t_token **tokens, t_token_type type)
 
 void	add_word_arg(t_cmd *cmd, t_token **tokens)
 {
-	cmd->argv = realloc(cmd->argv, sizeof(char*) * (cmd->argc + 2)); // realloc slk pq {Ö.Ö}
+	cmd->argv = realloc(cmd->argv, sizeof(char *) * (cmd->argc + 2));
 	cmd->argv[cmd->argc] = ft_strdup((*tokens)->value);
 	cmd->argv[cmd->argc + 1] = NULL;
 	cmd->argc++;
@@ -61,7 +62,7 @@ int	is_stop_token(t_token_type type)
 t_ast	*new_node(t_node_type type, t_ast *left, t_ast *right, void *content)
 {
 	t_ast	*node;
-	
+
 	node = malloc(sizeof(t_ast));
 	node->type = type;
 	node->left = left;
@@ -75,7 +76,7 @@ t_ast	*parse_command(t_token **tokens)
 	t_token_type	type;
 	t_redir			*redir;
 	t_cmd			*cmd;
-	
+
 	redir = NULL;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	while (*tokens)
