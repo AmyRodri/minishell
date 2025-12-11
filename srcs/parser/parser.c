@@ -6,18 +6,25 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:42:06 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 04:44:47 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/11 06:19:08 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+t_ast	*parse_simple(t_token **tokens)
+{
+	if (*tokens && (*tokens)->type == TK_LPAREN)
+		return (parse_subshell(tokens));
+	return (parse_command(tokens));
+}
+
 t_ast	*parser(t_token *tokens)
 {
-	t_ast	*root;
+	t_ast	*ast;
 
 	if (check_syntax(tokens))
 		return (NULL);
-	root = built_ast(tokens);
-	return (root);
+	ast = parse_sequence(&tokens);
+	return (ast);
 }
