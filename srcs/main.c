@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 17:10:11 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:12:16 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	input(char	*line, t_env_table	*env)
 	token = lexer(line);
 	if (!token)
 		return ;
-	// print_tokens(token);
 	ast_root = parser(token);
 	if (ast_root)
 	{
