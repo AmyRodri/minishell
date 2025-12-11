@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/05 16:21:57 by kamys            ###   ########.fr       */
+/*   Updated: 2025/12/11 02:26:30 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	input(char	*line, t_env_table	*env)
 	if (!token)
 		return ;
 	print_tokens(token);
+	parser(token);
 	tmp = ft_split(line, ' ');
 	if (!ft_strncmp(tmp[0], "pwd", 4))
 		pwd();
