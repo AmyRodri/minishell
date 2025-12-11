@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:42:06 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 04:44:47 by cassunca         ###   ########.fr       */
+/*   Created: 2025/12/11 05:12:56 by cassunca          #+#    #+#             */
+/*   Updated: 2025/12/11 05:14:09 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "exec.h"
 
-t_ast	*parser(t_token *tokens)
+void	free_char_array(char **arr)
 {
-	t_ast	*root;
+	int	i;
 
-	if (check_syntax(tokens))
-		return (NULL);
-	root = built_ast(tokens);
-	return (root);
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
+
+

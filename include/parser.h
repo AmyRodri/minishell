@@ -6,7 +6,7 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 01:03:17 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/11 04:45:36 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_redir
 typedef struct s_token	t_token;
 typedef enum s_token_type	t_token_type;
 
-void	parser(t_token *tokens);
+t_ast	*parser(t_token *tokens);
 int		check_syntax(t_token *tokens);
 int		token_op(t_token_type token);
 int		check_in_end(t_token *start, t_token *end);

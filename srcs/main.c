@@ -6,7 +6,7 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 02:26:30 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/11 05:12:37 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,20 @@
 void	input(char	*line, t_env_table	*env)
 {
 	t_token	*token;
-	char	**tmp;
+	t_ast	*ast_root;
+	char	**env_array;
+	int		exit_status;
 
 	token = lexer(line);
 	if (!token)
 		return ;
-	print_tokens(token);
-	parser(token);
-	tmp = ft_split(line, ' ');
-	if (!ft_strncmp(tmp[0], "pwd", 4))
-		pwd();
-	if (!ft_strncmp(tmp[0], "env", 4))
-		print_env(env);
-	if (!ft_strcmp(tmp[0], "cd"))
-		cd(env, tmp[1]);
-	if (!ft_strcmp(tmp[0], "export"))
-		export(env, tmp[1]);
-	if (!ft_strcmp(tmp[0], "unset"))
-		unset(env, tmp[1]);
-	if (!ft_strcmp(tmp[0], "echo"))
-		echo(env, tmp[1], line);
-	if (!ft_strncmp(tmp[0], "exit", 5))
+	// print_tokens(token);
+	ast_root = parser(token);
+	if (ast_root)
 	{
-		free(line);
-		free(tmp);
-		printf("exit\n");
-		exit(0);
+		env_array = env_export(env);
+		exit_status = execute_ast(ast_root, env_array);
+		free_char_array(env_array);
 	}
 }
 
