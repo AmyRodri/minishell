@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 11:48:24 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:08:36 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "parser.h"
 # include "colors.h"
 # include "prompt.h"
+# include "exec.h"
 
 # include <stdio.h>
 # include <signal.h>
@@ -29,6 +30,8 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 // signal.c
 int				get_singal(void);

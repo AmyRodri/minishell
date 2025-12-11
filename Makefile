@@ -17,6 +17,7 @@ RM			= rm -rf
 RUNLIB		= -C libft
 
 # Directories
+EXECDIR		= exec
 BUILTDIR	= built_in
 PROMPTDIR	= prompt
 PARSERDIR	= parser
@@ -62,15 +63,16 @@ SRCS_PARSER = parser.c				\
 			  parse_or.c			\
 			  parse_pipe.c			\
 			  parse_sequence.c		\
-			  parse_subshell.c		
+			  parse_subshell.c	
 
-SRCS_PROMPT	= prompt_init.c			\
-			  prompt_expand.c		\
-			  prompt_utils.c		\
-			  prompt_len.c			\
-			  prompt_parser.c		
+SECS_EXEC	= exec.c				\
+			= exec_cmd.c			\
+			= exec_redirect.c		\
+			= stub.c
 
 # Add directory prefix
+SRCS_EXEC	:= $(addprefix $(SRCSDIR)/$(EXECDIR)/, $(SRCS_EXEC))
+
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
 
 SRCS_PROMPT	:= $(addprefix $(SRCSDIR)/$(PROMPTDIR)/, $(SRCS_PROMPT))
@@ -83,7 +85,7 @@ SRCS_UTILS	:= $(addprefix $(SRCSDIR)/$(UTILSDIR)/, $(SRCS_UTILS))
 
 SRCS_LEXER	:= $(addprefix $(SRCSDIR)/$(LEXERDIR)/, $(SRCS_LEXER))
 
-SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_PROMPT)
+SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_PROMPT) $(SRCS_EXEC)
 
 # Object files
 OBJS		= $(SRCS:$(SRCSDIR)/%.c=$(OBJDIR)/%.o)
