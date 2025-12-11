@@ -20,6 +20,7 @@ RUNLIB		= -C libft
 ALIASDIR	= alias
 EXPANDDIR	= expander
 EXECDIR		= exec
+EXECDIR		= exec
 BUILTDIR	= built_in
 PROMPTDIR	= prompt
 PARSERDIR	= parser
