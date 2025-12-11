@@ -6,7 +6,7 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 02:29:06 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/11 02:45:29 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "lexer.h"
 # include "utils.h"
 # include "parser.h"
+# include "exec.h"
 
 # include <stdio.h>
 # include <signal.h>
@@ -27,6 +28,8 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 // signal.c
 int				get_singal(void);

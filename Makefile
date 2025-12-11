@@ -17,6 +17,7 @@ RM			= rm -rf
 RUNLIB		= -C libft
 
 # Directories
+EXECDIR		= exec
 BUILTDIR	= built_in
 PARSERDIR	= parser
 UTILSDIR	= utils
@@ -54,7 +55,14 @@ SRCS_PARSER = parser.c				\
 			  parser_syntax.c		\
 			  parser_utils.c
 
+SECS_EXEC	= exec.c				\
+			= exec_cmd.c			\
+			= exec_redirect.c		\
+			= stub.c
+
 # Add directory prefix
+SRCS_EXEC	:= $(addprefix $(SRCSDIR)/$(EXECDIR)/, $(SRCS_EXEC))
+
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
 
 SRCS_PARSER	:= $(addprefix $(SRCSDIR)/$(PARSERDIR)/, $(SRCS_PARSER))
@@ -65,7 +73,7 @@ SRCS_UTILS	:= $(addprefix $(SRCSDIR)/$(UTILSDIR)/, $(SRCS_UTILS))
 
 SRCS_LEXER	:= $(addprefix $(SRCSDIR)/$(LEXERDIR)/, $(SRCS_LEXER))
 
-SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER)
+SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_EXEC)
 
 # Object files
 OBJS		= $(SRCS:$(SRCSDIR)/%.c=$(OBJDIR)/%.o)
