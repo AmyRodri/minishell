@@ -18,6 +18,7 @@ RUNLIB		= -C libft
 
 # Directories
 EXECDIR		= exec
+EXECDIR		= exec
 BUILTDIR	= built_in
 PROMPTDIR	= prompt
 PARSERDIR	= parser
