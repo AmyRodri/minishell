@@ -6,7 +6,7 @@
 /*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 06:20:07 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/11 06:23:57 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	input(char	*line, t_env_table	*env)
 	token = lexer(line);
 	if (!token)
 		return ;
-	// print_tokens(token);
 	ast_root = parser(token);
 	if (ast_root)
 	{
@@ -34,7 +33,7 @@ void	input(char	*line, t_env_table	*env)
 
 int	run_interactive_shell(t_env_table *env)
 {
-	char		*line;
+	char	*line;
 
 	while (1)
 	{
