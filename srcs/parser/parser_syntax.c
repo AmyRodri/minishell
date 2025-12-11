@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_syntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 14:37:31 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/11 01:08:01 by cassunca         ###   ########.fr       */
+/*   Updated: 2025/12/11 05:25:14 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_token	*check_paren(t_token *tokens)
 		return (NULL);
 	while (tokens)
 	{
-		printf("paren:  %s\n", tokens->value);
 		if (tokens->type == TK_LPAREN)
 			depth++;
 		else if (tokens->type == TK_RPAREN)
@@ -107,7 +106,6 @@ int	check_syntax(t_token *tokens)
 			printf("syntax: unexpected ')'\n");
 			return (1);
 		}
-		printf("check:  %s\n", head->value);
 		head = head->next;
 	}
 	return (0);

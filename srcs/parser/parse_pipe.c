@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parse_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:42:06 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/11 03:24:30 by amyrodri         ###   ########.fr       */
+/*   Created: 2025/12/11 03:14:30 by amyrodri          #+#    #+#             */
+/*   Updated: 2025/12/11 03:14:52 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_ast	*parse_simple(t_token **tokens)
+t_ast	*parse_pipe(t_token **tokens)
 {
-	if (*tokens && (*tokens)->type == TK_LPAREN)
-		return (parse_subshell(tokens));
-	return (parse_command(tokens));
-}
+	t_ast	*node;
+	t_ast	*new;
+	t_ast	*right;
 
-void	parser(t_token *tokens)
-{
-	t_ast	*ast;
-
-	if (check_syntax(tokens))
-		return ;
-	ast = parse_sequence(&tokens);
-	print_ast(ast, 0);
+	node = parse_simple(tokens);
+	while (*tokens && (*tokens)->type == TK_PIPE)
+	{
+		*tokens = (*tokens)->next;
+		right = parse_simple(tokens);
+		new = malloc(sizeof(t_ast));
+		new->type = NODE_PIPE;
+		new->left = node;
+		new->right = right;
+		new->content = NULL;
+		node = new;
+	}
+	return (node);
 }

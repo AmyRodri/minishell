@@ -44,7 +44,14 @@ SRCS_LEXER	= lexer.c				\
 
 SRCS_PARSER = parser.c				\
 			  parser_syntax.c		\
-			  parser_utils.c
+			  parser_utils.c		\
+			  parse_and.c			\
+			  parse_command.c		\
+			  parse_or.c			\
+			  parse_pipe.c			\
+			  parse_sequence.c		\
+			  parse_subshell.c		\
+			  utils.c
 
 # Add directory prefix
 SRCS_PARSER	:= $(addprefix $(SRCSDIR)/$(PARSERDIR)/, $(SRCS_PARSER))
