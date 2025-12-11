@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/13 16:25:02 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:25:35 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	execute_cmd(t_ast *cmd_node, t_env_table *env)
 	cmd = (t_cmd *)cmd_node->content;
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
+	if (is_builtin(cmd->argv) && is_exit(cmd->argv))
+		return (execute_exit(cmd->argv, envp));
 	if (is_builtin(cmd->argv))
 		return (execute_builtin(cmd, env));
 	path_cmd = resolve_path(cmd->argv[0], env);
