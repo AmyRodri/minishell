@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:48:48 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/05 16:32:50 by kamys            ###   ########.fr       */
+/*   Updated: 2025/12/16 17:46:26 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 **
 ** Resumindo:
 ** - cd sem args → HOME
+** - cd ~ → HOME
 ** - cd - → OLDPWD e printar novo PWD
 ** - Muitos args → erro
 ** - HOME não definido → erro
@@ -54,41 +55,105 @@
 ** - Atualizar PWD/OLDPWD corretamente
 */
 
-void	cd(t_env_table *env, char *path)
+static void	set_pwd_oldpwd(t_env_table *env, char *pwd, char *old_pwd)
+{
+	env_set(env, "OLDPWD", old_pwd);
+	env_set(env, "PWD", pwd);
+}
+
+static void	cd_path(t_env_table *env, char *path)
 {
 	char	*cwd;
 	char	*old_pwd;
-	char	*home;
-	// atualizar codigo ^~^
-	if (!path || !ft_strcmp(path, "~"))
+
+	old_pwd = env_get(env, "PWD");
+	if (!old_pwd)
 	{
-		home = env_get(env, "HOME");
-		chdir(home);
-		old_pwd = env_get(env, "PWD");
-		cwd = getcwd(NULL, 0);
-		if (!cwd)
-			perror("cd");
-		else
-		{
-			env_set(env, "PWD", cwd);
-			env_set(env, "OLDPWD", old_pwd);
-			free(cwd);
-		}
+		perror("cd");
 		return ;
 	}
 	if (chdir(path) == -1)
 	{
 		printf("cd: %s: No such file or directory\n", path);
+		free(old_pwd);
 		return ;
 	}
-	old_pwd = env_get(env, "PWD");
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		perror("cd");
-	else
 	{
-		env_set(env, "PWD", cwd);
-		env_set(env, "OLDPWD", old_pwd);
-		free(cwd);
+		perror("cd");
+		return ;
 	}
+	set_pwd_oldpwd(env, cwd, old_pwd);
+	free(cwd);
+}
+
+static void	cd_dash(t_env_table *env)
+{
+	char	*cwd;
+	char	*old_pwd;
+	char	*pwd;
+
+	old_pwd = env_get(env, "OLDPWD");
+	if (!old_pwd)
+	{
+		ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
+		return ;
+	}
+	pwd = env_get(env, "PWD");
+	if (chdir(old_pwd) == -1)
+	{
+		perror("cd");
+		return ;
+	}
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("cd");
+		return ;
+	}
+	printf("%s\n", cwd);
+	set_pwd_oldpwd(env, cwd, pwd);
+	free(cwd);
+}
+
+static void	cd_home(t_env_table *env)
+{
+	char	*cwd;
+	char	*old_pwd;
+	char	*home;
+
+	home = env_get(env, "HOME");
+	if (!home)
+	{
+		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		return ;
+	}
+	old_pwd = getcwd(NULL, 0);
+	if (chdir(home) == -1)
+	{
+		perror("cd");
+		free(old_pwd);
+		return ;
+	}
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("cd");
+		free(old_pwd);
+		return ;
+	}
+	set_pwd_oldpwd(env, cwd, old_pwd);
+	free(cwd);
+	free(old_pwd);
+}
+
+void	cd(t_env_table *env, char *path)
+{
+	if (!path || !ft_strcmp(path, "~"))
+		cd_home(env);
+	else if (!ft_strcmp(path, "-"))
+		cd_dash(env);
+	else
+		cd_path(env, path);
 }
