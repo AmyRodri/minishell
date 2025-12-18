@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:48:48 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/16 17:46:26 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/17 23:18:53 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,9 @@ static void	cd_path(t_env_table *env, char *path)
 	char	*cwd;
 	char	*old_pwd;
 
-	old_pwd = env_get(env, "PWD");
+	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
-	{
-		perror("cd");
-		return ;
-	}
+		return (perror("cd"));
 	if (chdir(path) == -1)
 	{
 		printf("cd: %s: No such file or directory\n", path);
@@ -82,9 +79,11 @@ static void	cd_path(t_env_table *env, char *path)
 	if (!cwd)
 	{
 		perror("cd");
+		free(old_pwd);
 		return ;
 	}
 	set_pwd_oldpwd(env, cwd, old_pwd);
+	free(old_pwd);
 	free(cwd);
 }
 
@@ -132,16 +131,14 @@ static void	cd_home(t_env_table *env)
 	old_pwd = getcwd(NULL, 0);
 	if (chdir(home) == -1)
 	{
-		perror("cd");
 		free(old_pwd);
-		return ;
+		return (perror("cd"));
 	}
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("cd");
 		free(old_pwd);
-		return ;
+		return (perror("cd"));
 	}
 	set_pwd_oldpwd(env, cwd, old_pwd);
 	free(cwd);
