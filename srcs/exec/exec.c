@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:36:20 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/13 16:18:35 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:19:53 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	execute_ast(t_ast *root, t_env_table *env)
 {
 	if (!root)
 		return (0);
-	if (root->type == NODE_PIPE)
-		return (handle_pipe(root, env));
-	if (root->type == NODE_REDIR)
-		return (handle_redirect(root, env));
+	// if (root->type == NODE_PIPE)
+	// 	return (handle_pipe(root, envp));
+	// if (root->type == NODE_REDIR)
+	// 	return (handle_redir(root, envp));
 	if (root->type == NODE_CMD)
 		return (execute_cmd(root, env));
 	if (root->type == NODE_AND)
@@ -31,16 +31,8 @@ int	execute_ast(t_ast *root, t_env_table *env)
 
 void	exec_child(char *path_cmd, char **av, t_env_table *env)
 {
-	execve(path_cmd, av, env_export(env));
-	ft_putstr_fd("Minishell: ", 2);
-	ft_putstr_fd(av[0], 2);
-	if (errno == ENOENT)
-		ft_putstr_fd(": command not found\n", 2);
-	else
-	{
-		ft_putstr_fd(": ", 2);
-		perror("");
-	}
+	execve(path_cmd, av, envp);
+	perror("Minishell\n");
 	exit(127);
 }
 
