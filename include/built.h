@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2026/01/13 16:00:15 by amyrodri         ###   ########.fr       */
+/*   Created: 2025/12/03 13:00:29 by amyrodri          #+#    #+#             */
+/*   Updated: 2026/01/13 16:01:01 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 typedef struct s_env_table	t_env_table;
 typedef struct s_cmd		t_cmd;
 
-void	print_env(t_env_table *env, char *path);
-void	cd(t_env_table *env, char *path);
+void	print_env(t_env_table *env);
+void	cd(t_env_table *env, t_cmd *path);
 void	export(t_env_table *env, char *key_value);
 void	unset(t_env_table *env, char *key);
 void	echo(t_env_table *env, t_cmd *cmd);
