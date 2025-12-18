@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2026/01/08 11:34:50 by kamys            ###   ########.fr       */
+/*   Created: 2025/12/03 17:51:35 by cassunca          #+#    #+#             */
+/*   Updated: 2026/01/08 11:43:13 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	echo(t_env_table *env, t_cmd *cmd)
 {
 	int	i;
 	int	flag_n;
-	// atualizar codigo ^~^
+
 	(void)env;
 	if (!cmd || !cmd->argv)
 		return ;
