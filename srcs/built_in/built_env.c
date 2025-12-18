@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 12:59:58 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/05 16:02:40 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:01:49 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 //       printf("%s=%s\n", curr->key, curr->value);
 //
 
-void	print_env(t_env_table *env, char *path)
+void	print_env(t_env_table *env, t_cmd *cmd)
 {
 	char	**new_env;
 	int		i;
-	// slk vamo revisar tudo quando o Big Bang esturar novamente !_!
-	(void)path;
+
+	(void)cmd;
 	new_env = env_export(env);
 	i = 0;
 	while (new_env[i])

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 16:28:05 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/05 16:04:14 by cassunca         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2026/01/13 16:02:18 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "built.h"
 
