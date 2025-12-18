@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/18 14:15:58 by amyrodri         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:21:44 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,26 @@ void	input(char	*line, t_env_table	*env)
 	ast = parser(token);
 	if (!ast)
 		return ;
-	if (!ft_strncmp(line, "pwd", 4))
-		printf("%s\n", env_get(env, "PWD"));
-	if (!ft_strncmp(line, "env", 4))
-		print_env(env);
-	if (!ft_strcmp(tmp[0], "cd"))
-		cd(env, tmp[1]);
-	if (!ft_strcmp(tmp[0], "export"))
-		export(env, tmp[1]);
-	if (!ft_strcmp(tmp[0], "unset"))
-		unset(env, tmp[1]);
-	if (!ft_strcmp(tmp[0], "echo"))
-		echo(env, tmp[1], line);
-	if (!ft_strncmp(tmp[0], "exit", 5))
-	{
-		free(line);
-		free(tmp);
-		printf("exit\n");
-		exit(0);
-	}
+	(void)env;
+	// if (!ft_strncmp(line, "pwd", 4))
+	// 	printf("%s\n", env_get(env, "PWD"));
+	// if (!ft_strncmp(line, "env", 4))
+	// 	print_env(env);
+	// if (!ft_strcmp(tmp[0], "cd"))
+	// 	cd(env, tmp[1]);
+	// if (!ft_strcmp(tmp[0], "export"))
+	// 	export(env, tmp[1]);
+	// if (!ft_strcmp(tmp[0], "unset"))
+	// 	unset(env, tmp[1]);
+	// if (!ft_strcmp(tmp[0], "echo"))
+	// 	echo(env, tmp[1], line);
+	// if (!ft_strncmp(tmp[0], "exit", 5))
+	// {
+	// 	free(line);
+	// 	free(tmp);
+	// 	printf("exit\n");
+	// 	exit(0);
+	// }
 }
 
 int	run_interactive_shell(t_env_table *env)
