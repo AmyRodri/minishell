@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/05 16:21:57 by kamys            ###   ########.fr       */
+/*   Updated: 2025/12/18 14:15:58 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 void	input(char	*line, t_env_table	*env)
 {
 	t_token	*token;
-	char	**tmp;
+	t_ast	*ast;
 
 	token = lexer(line);
 	if (!token)
 		return ;
 	print_tokens(token);
-	tmp = ft_split(line, ' ');
-	if (!ft_strncmp(tmp[0], "pwd", 4))
-		pwd();
-	if (!ft_strncmp(tmp[0], "env", 4))
+	ast = parser(token);
+	if (!ast)
+		return ;
+	if (!ft_strncmp(line, "pwd", 4))
+		printf("%s\n", env_get(env, "PWD"));
+	if (!ft_strncmp(line, "env", 4))
 		print_env(env);
 	if (!ft_strcmp(tmp[0], "cd"))
 		cd(env, tmp[1]);
