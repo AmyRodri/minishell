@@ -6,12 +6,18 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 23:36:55 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:06:01 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:07:20 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROMPT_H
 # define PROMPT_H
+
+# define RED     "\033[31m"
+# define GREEN   "\033[32m"
+# define YELLOW  "\033[33m"
+# define BLUE    "\033[34m"
+# define RESET   "\033[0m"
 
 # include "minishell.h"
 
