@@ -62,7 +62,8 @@ SRCS_PARSER = parser.c				\
 			  parse_sequence.c		\
 			  parse_subshell.c		
 
-SRCS_PROMPT	= prompt.c
+SRCS_PROMPT	= prompt.c				\
+			  prompt_default.c
 
 # Add directory prefix
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
