@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 15:59:26 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 15:59:43 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "utils.h"
 # include "parser.h"
 # include "exec.h"
+# include "colors.h"
 # include "prompt.h"
 
 # include <stdio.h>
