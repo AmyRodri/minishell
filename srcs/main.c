@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 15:56:31 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/13 15:59:31 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	run_interactive_shell(t_env_table *env)
 
 	while (1)
 	{
-		line = readline(ft_strjoin(env_get(env, "USER"), " > "));
+		line = readline(get_prompt(env));
 		if (!line)
 			break ;
 		if (*line)
@@ -65,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!env)
 		return (1);
 	setup_sig();
+	init_ps1(env);
 	if (argc >= 3)
 		status = run_command_mode(argv);
 	else if (isatty(STDIN_FILENO))
