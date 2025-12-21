@@ -68,18 +68,6 @@ SRCS_PARSER = parser.c				\
 			  parse_sequence.c		\
 			  parse_subshell.c	
 
-SRCS_EXEC	= exec.c				\
-			  exec_cmd.c			\
-			  exec_redirect.c		\
-			  exec_pipe.c			\
-			  exec_and.c			\
-			  exec_or.c				\
-			  exec_path.c			\
-			  exec_utils.c			\
-			  exec_heredoc.c		\
-			  exec_heredoc_utils.c	\
-			  exec_heredoc_utils2.c\
-
 SRCS_PROMPT	= prompt_init.c			\
 			  prompt_expand.c		\
 			  prompt_utils.c		\
