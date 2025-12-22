@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 10:15:14 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:07:08 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:07:44 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*cwd_with_tilde(t_env_table *env)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return ("~");
+		return (ft_strdup("~"));
 	home = env_get(env, "HOME");
 	if (!home)
 		return (cwd);
