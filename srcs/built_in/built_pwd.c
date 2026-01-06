@@ -6,16 +6,18 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:09:13 by kamys             #+#    #+#             */
-/*   Updated: 2025/12/05 16:20:46 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/06 15:27:00 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-void	pwd(void)
+void	pwd(t_env_table *env, t_cmd *cmd)
 {
 	char	*cwd;
 
+	(void)env;
+	(void)cmd;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		perror("pwd");
