@@ -45,11 +45,13 @@ SRCS_LEXER	= lexer.c			\
 			  lexer_word.c		\
 			  lexer_utils.c
 
-SRCS_BUILT	= built_env.c		\
-			  built_cd.c		\
-			  built_export.c	\
-			  built_unset.c		\
-			  built_echo.c		\
+SRCS_BUILT	= built_env.c			\
+			  built_cd.c			\
+			  built_export.c		\
+			  built_export_dis.c	\
+			  built_export_utils.c	\
+			  built_unset.c			\
+			  built_echo.c			\
 			  built_pwd.c
 
 SRCS_PARSER = parser.c				\
