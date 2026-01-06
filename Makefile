@@ -71,7 +71,11 @@ SRCS_EXEC	= exec.c				\
 			  exec_path.c			\
 			  exec_utils.c			
 
-SRCS_PROMPT	= prompt.c				\
+SRCS_PROMPT	= prompt_init.c			\
+			  prompt_expand.c		\
+			  prompt_utils.c		\
+			  prompt_len.c			\
+			  prompt_parser.c		\
 			  prompt_default.c
 
 # Add directory prefix
