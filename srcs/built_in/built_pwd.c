@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   built_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:09:13 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/05 16:02:18 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:03:42 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-void	pwd(t_env_table *env, char *path)
+void	pwd(t_env_table *env, t_cmd *cmd)
 {
 	char	*cwd;
 
 	(void)env;
-	(void)path;
+	(void)cmd;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		perror("pwd");
