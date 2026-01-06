@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:03:32 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:03:51 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exec_built_in(t_env_table *env, t_cmd *cmd)
 	if (!ft_strcmp(cmd->argv[0], "pwd"))
 		return (pwd(env, cmd));
 	if (!ft_strcmp(cmd->argv[0], "unset"))
-		return (unset(env, cmd->argv[1]));
+		return (unset(env, cmd));
 }
 
 void	input(char	*line, t_env_table	*env)
