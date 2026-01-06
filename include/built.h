@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:00:29 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/06 15:40:35 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/06 16:37:00 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 
 typedef struct s_env_table	t_env_table;
 typedef struct s_cmd		t_cmd;
+
+// ==================== EXPORT ======================
+char	*ft_strjoin3(char *s1, char *s2, char *s3);
+void	display_export(t_env_table *env);
+int		env_len(t_env_table *table);
+int		is_append(char *s);
+// ==================== EXPORT ======================
 
 void	print_env(t_env_table *env, t_cmd *cmd);
 void	export(t_env_table *env, t_cmd *cmd);
