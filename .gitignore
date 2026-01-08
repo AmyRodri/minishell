@@ -8,7 +8,7 @@ minishell
 *.d
 
 # Object files
-objs/
+.objs/
 *.o
 *.ko
 *.obj
