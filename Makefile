@@ -78,8 +78,7 @@ SRCS_PROMPT	= prompt_init.c			\
 			  prompt_expand.c		\
 			  prompt_utils.c		\
 			  prompt_len.c			\
-			  prompt_parser.c		\
-			  prompt_default.c
+			  prompt_parser.c		
 
 # Add directory prefix
 SRCS_EXEC	:= $(addprefix $(SRCSDIR)/$(EXECDIR)/, $(SRCS_EXEC))
