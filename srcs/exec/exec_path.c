@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 04:05:57 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/08 15:24:16 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:29:33 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	is_builtin(char **av)
 int	execute_builtin(t_cmd *cmd, t_env_table *env)
 {
 	if (ft_strcmp(cmd->argv[0], "cd") == 0)
-		cd(env, cmd->argv[1]);
+		cd(env, cmd);
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
-		echo(env, cmd->argv[1], cmd->argv[2]);
+		echo(env, cmd);
 	if (ft_strcmp(cmd->argv[0], "env") == 0)
-		print_env(env, cmd->argv[1]);
+		print_env(env, cmd);
 	if (ft_strcmp(cmd->argv[0], "export") == 0)
-		export(env, cmd->argv[1]);
+		export(env, cmd);
 	if (ft_strcmp(cmd->argv[0], "pwd") == 0)
-		pwd(env, cmd->argv[1]);
+		pwd(env, cmd);
 	if (ft_strcmp(cmd->argv[0], "unset") == 0)
-		unset(env, cmd->argv[1]);
+		unset(env, cmd);
 	return (0);
 }
 
@@ -59,10 +59,14 @@ char	*resolve_path(char *cmd, t_env_table *env)
 		full_path = ft_strjoin(tmp, cmd);
 		free(tmp);
 		if (access(full_path, X_OK) == 0)
+		{
+			free_char_array(paths);
 			return (full_path);
+		}
 		free(full_path);
 		i++;
 	}
+	free_char_array(paths);
 	return (NULL);
 }
 
