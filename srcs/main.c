@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:21:43 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:21:57 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	free_ast(t_ast *root)
 		free(root->content);
 	free(root);
 }
-
 
 void	input(char	*line, t_env_table	*env)
 {
