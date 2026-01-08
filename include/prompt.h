@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 23:36:55 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:13:32 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:14:35 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*resolve_prompt_token(t_env_table *env, char *s, int *i);
 /* Utils */
 
 char	*cwd_with_tilde(t_env_table *env);
-char	*expand_cwd(char limit);
+char	*expand_cwd(t_env_table *env, char limit);
 void	prompt_default(t_env_table *env);
 
 /* Length */
