@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:12:32 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:12:50 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ void	input(char	*line, t_env_table	*env)
 
 int	run_interactive_shell(t_env_table *env)
 {
-	char	*line;
+	char		*line;
+	char		*prompt;
 
 	while (1)
 	{
-		line = readline(get_prompt(env));
+		prompt = get_prompt(env);
+		line = readline(prompt);
+		free(prompt);
 		if (!line)
 			break ;
 		if (*line)
