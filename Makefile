@@ -25,7 +25,7 @@ UTILSDIR	= utils
 LEXERDIR	= lexer
 ENVDIR		= env
 SRCSDIR		= srcs
-OBJDIR		= objs
+OBJDIR		= .objs
 
 # Source files
 SRCS		= main.c				\
