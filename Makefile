@@ -28,21 +28,21 @@ SRCSDIR		= srcs
 OBJDIR		= objs
 
 # Source files
-SRCS		= main.c					\
+SRCS		= main.c				\
 			  signal.c
 
-SRCS_ENV	= hash.c					\
-			  env_init.c				\
-			  env_new.c					\
-			  env_table.c				\
+SRCS_ENV	= hash.c				\
+			  env_init.c			\
+			  env_new.c				\
+			  env_table.c			\
 			  env_export.c
 
-SRCS_UTILS	= ft_isspace.c				\
-			  ft_strcmp.c				\
+SRCS_UTILS	= ft_isspace.c			\
+			  ft_strcmp.c			\
 
-SRCS_LEXER	= lexer.c					\
+SRCS_LEXER	= lexer.c				\
 			  lexer_operetor.c		\
-			  lexer_word.c				\
+			  lexer_word.c			\
 			  lexer_utils.c
 
 SRCS_BUILT	= built_env.c			\
@@ -68,8 +68,7 @@ SRCS_PROMPT	= prompt_init.c			\
 			  prompt_expand.c		\
 			  prompt_utils.c		\
 			  prompt_len.c			\
-			  prompt_parser.c		\
-			  prompt_default.c
+			  prompt_parser.c		
 
 # Add directory prefix
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
