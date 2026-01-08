@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 17:13:26 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:14:21 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	input(char	*line, t_env_table	*env)
 	ast_root = parser(token);
 	if (ast_root)
 		exit_status = execute_ast(ast_root, env);
+	env_set(env, "LAST_CODE", ft_itoa(exit_status));
 }
 
 int	run_interactive_shell(t_env_table *env)
