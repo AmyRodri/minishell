@@ -6,14 +6,20 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:48:48 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/08 11:43:33 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 12:01:03 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "built.h"
 
-void	cd(t_env_table *env, char *path)
+static void	set_pwd_oldpwd(t_env_table *env, char *pwd, char *old_pwd)
+{
+	env_set(env, "OLDPWD", old_pwd);
+	env_set(env, "PWD", pwd);
+}
+
+static void	cd_path(t_env_table *env, char *path)
 {
 	char	*cwd;
 	char	*old_pwd;
