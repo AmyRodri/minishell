@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:26:52 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/08 15:38:43 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:50:42 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-t_redir	*new_redir_content(t_redir_type type, char *file)
-{
-	t_redir	*redir;
-
-	redir = (t_redir *)malloc(sizeof(t_redir));
-	if (!redir)
-		return (NULL);
-	redir->type = type;
-	redir->file = ft_strdup(file);
-	redir->next = NULL;
-	return (redir);
-}
-
-t_ast	*new_redir_node(t_ast *cmd_node, t_redir_type type, char *file)
-{
-	t_redir	*redir_content;
-
-	redir_content = new_redir_content(type, file);
-	if (!redir_content)
-		return (NULL);
-	return (new_ast_node(NODE_REDIR, cmd_node, NULL, redir_content));
-}
 
 int	apply_redirect(t_redir *redir)
 {

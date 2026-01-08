@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/05 14:47:40 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/08 15:56:31 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	input(char	*line, t_env_table	*env)
 	ast_root = parser(token);
 	if (ast_root)
 		exit_status = execute_ast(ast_root, env);
+	env_set(env, "LAST_CODE", ft_itoa(exit_status));
 }
 
 int	run_interactive_shell(t_env_table *env)
