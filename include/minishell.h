@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 17:12:43 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 18:25:24 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "colors.h"
 # include "prompt.h"
 # include "exec.h"
+# include "expander.h"
 
 # include <stdio.h>
 # include <signal.h>
