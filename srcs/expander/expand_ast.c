@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 18:01:18 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 23:24:07 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/08 23:42:08 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	handle_dolar(char **res, char *s, int *i, t_env_table *env)
 void	handle_tilde(char **res, char *s, int *i, t_env_table *env)
 {
 	if (*i == 0 || s[*i - 1] == ' ')
-		append_str(res, env_get(env, "HOME "));
+		append_str(res, env_get(env, "HOME"));
 	else
 		append_char(res, s[*i]);
 	(*i)++;
