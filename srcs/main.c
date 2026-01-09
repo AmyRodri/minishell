@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:22:03 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:22:44 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	input(char	*line, t_env_table	*env)
 	if (!token)
 		return ;
 	ast_root = parser(token);
+	expand_ast(ast_root, env);
 	if (ast_root)
 		exit_status = execute_ast(ast_root, env);
 	(void)exit_status;

@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:19:11 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:22:40 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "colors.h"
 # include "prompt.h"
 # include "exec.h"
+# include "expander.h"
 
 # include <stdio.h>
 # include <signal.h>

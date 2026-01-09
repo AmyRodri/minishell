@@ -17,7 +17,7 @@ RM			= rm -rf
 RUNLIB		= -C libft
 
 # Directories
-EXECDIR		= exec
+EXPANDDIR	= expander
 EXECDIR		= exec
 BUILTDIR	= built_in
 PROMPTDIR	= prompt
@@ -81,7 +81,11 @@ SRCS_PROMPT	= prompt_init.c			\
 			  prompt_len.c			\
 			  prompt_parser.c		
 
+SRCS_EXPAND	= expand_ast.c
+
 # Add directory prefix
+SRCS_EXPAND	:= $(addprefix $(SRCSDIR)/$(EXPANDDIR)/, $(SRCS_EXPAND))
+
 SRCS_EXEC	:= $(addprefix $(SRCSDIR)/$(EXECDIR)/, $(SRCS_EXEC))
 
 SRCS_BUILT	:= $(addprefix $(SRCSDIR)/$(BUILTDIR)/, $(SRCS_BUILT))
@@ -96,7 +100,7 @@ SRCS_UTILS	:= $(addprefix $(SRCSDIR)/$(UTILSDIR)/, $(SRCS_UTILS))
 
 SRCS_LEXER	:= $(addprefix $(SRCSDIR)/$(LEXERDIR)/, $(SRCS_LEXER))
 
-SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_EXEC) $(SRCS_PROMPT)
+SRCS		:= $(addprefix $(SRCSDIR)/, $(SRCS)) $(SRCS_ENV) $(SRCS_LEXER) $(SRCS_UTILS) $(SRCS_BUILT) $(SRCS_PARSER) $(SRCS_PROMPT) $(SRCS_EXEC) $(SRCS_EXPAND)
 
 # Object files
 OBJS		= $(SRCS:$(SRCSDIR)/%.c=$(OBJDIR)/%.o)
