@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:23:07 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:23:13 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	main(int argc, char **argv, char **envp)
 	rl_cleanup_after_signal();
 	env_destroy(sh->env);
 	alias_destroy(sh->aliases);
+	free(sh);
 	printf("exit\n");
 	return (status);
 }
