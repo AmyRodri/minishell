@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:17:23 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:23:01 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_cmd
 	char					**argv;
 	int						argc;
 	t_redir					*redir;
+	int						alias_expanded;
 }							t_cmd;
 
 typedef enum s_token_type	t_token_type;

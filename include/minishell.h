@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:22:40 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:22:57 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "prompt.h"
 # include "exec.h"
 # include "expander.h"
+# include "alias.h"
 
 # include <stdio.h>
 # include <signal.h>
@@ -36,12 +37,21 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+typedef struct s_alias_table	t_alias_table;
+
+typedef struct s_shell
+{
+	t_env_table		*env;
+	t_alias_table	*aliases;
+	int				last_status;
+}	t_shell;
+
+
+void	input(char	*line, t_shell *sh);
 // signal.c
 int				get_singal(void);
 void			reset_signal(void);
 void			handler(int sig);
 void			setup_sig(void);
-
-
 
 #endif
