@@ -101,7 +101,13 @@ SRCS_EXEC	= exec.c				\
 			  exec_heredoc_utils.c	\
 			  exec_heredoc_utils2.c
 
-SRCS_EXPAND	= expand_ast.c
+SRCS_EXPAND	= expand_ast.c			\
+			  expand_alias.c
+
+SRCS_ALIAS	= alias_init.c			\
+			  alias_export.c		\
+			  alias_new.c			\
+			  alias_table.c			
 
 # Add directory prefix
 SRCS_ALIAS	:= $(addprefix $(SRCSDIR)/$(ALIASDIR)/, $(SRCS_ALIAS))
