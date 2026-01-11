@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 23:15:01 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/10 22:55:16 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/11 10:58:22 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	replace_arg(t_cmd *cmd, char *alias_val)
 		new_argv[i++] = ft_strdup(cmd->argv[j++]);
 	new_argv[i] = NULL;
 	free_argv(cmd->argv);
+	free_argv(alias_words);
 	cmd->argv = new_argv;
 }
 

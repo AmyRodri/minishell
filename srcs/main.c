@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/10 22:57:09 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/11 10:57:34 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	main(int argc, char **argv, char **envp)
 	rl_cleanup_after_signal();
 	env_destroy(sh->env);
 	alias_destroy(sh->aliases);
+	free(sh);
 	printf("exit\n");
 	return (status);
 }
