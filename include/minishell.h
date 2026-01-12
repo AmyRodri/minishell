@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:23:28 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:23:40 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_shell
 	t_alias_table	*aliases;
 	int				last_status;
 }	t_shell;
-
 
 void	input(char	*line, t_shell *sh);
 void	free_tokens(t_token *tok);
