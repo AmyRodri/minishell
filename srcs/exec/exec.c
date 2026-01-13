@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:36:20 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/13 15:31:53 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:30:47 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	execute_ast(t_ast *root, t_env_table *env)
 	if (root->type == NODE_PIPE)
 		return (handle_pipe(root, env));
 	if (root->type == NODE_CMD)
+		return (execute_cmd(root, env));
+	if (root->type == NODE_AND)
+		return (handle_and(root, env));
+	if (root->type == NODE_OR)
+		return (handle_or(root, env));
 		return (execute_cmd(root, env));
 	if (root->type == NODE_AND)
 		return (handle_and(root, env));

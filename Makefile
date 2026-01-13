@@ -31,22 +31,22 @@ SRCSDIR		= srcs
 OBJDIR		= .objs
 
 # Source files
-SRCS		= main.c				\
+SRCS 		= main.c			\
 			  signal.c
 
-SRCS_ENV	= hash.c				\
-			  env_init.c			\
-			  env_new.c				\
-			  env_table.c			\
+SRCS_ENV	= hash.c			\
+			  env_init.c		\
+			  env_new.c			\
+			  env_table.c		\
 			  env_export.c
 
 SRCS_UTILS	= ft_isspace.c			\
 			  ft_strcmp.c			\
 			  frees.c
 
-SRCS_LEXER	= lexer.c				\
-			  lexer_operetor.c		\
-			  lexer_word.c			\
+SRCS_LEXER	= lexer.c			\
+			  lexer_operetor.c	\
+			  lexer_word.c		\
 			  lexer_utils.c
 
 SRCS_BUILT	= built_env.c			\
@@ -66,7 +66,7 @@ SRCS_PARSER = parser.c				\
 			  parse_or.c			\
 			  parse_pipe.c			\
 			  parse_sequence.c		\
-			  parse_subshell.c	
+			  parse_subshell.c
 
 SRCS_EXEC	= exec.c				\
 			  exec_cmd.c			\
@@ -97,6 +97,36 @@ SRCS_ALIAS	= alias_init.c			\
 			  alias_export.c		\
 			  alias_new.c			\
 			  alias_table.c			
+
+SRCS_PROMPT	= prompt_init.c			\
+			  prompt_expand.c		\
+			  prompt_utils.c		\
+			  prompt_len.c			\
+			  prompt_parser.c		
+
+SRCS_EXPAND	= expand_ast.c			\
+			  expand_alias.c		\
+			  expand_cmd.c			\
+			  expand_quotes.c		\
+			  expand_redir.c		\
+			  expand_tilde.c		\
+			  expand_utils.c		\
+			  expand_vars.c			\
+			  expand_word.c
+
+SRCS_ALIAS	= alias_init.c			\
+			  alias_export.c		\
+			  alias_new.c			\
+			  alias_table.c			
+
+SRCS_EXEC	= exec.c				\
+			  exec_cmd.c			\
+			  exec_redirect.c		\
+			  exec_pipe.c			\
+			  exec_and.c			\
+			  exec_or.c				\
+			  exec_path.c			\
+			  exec_utils.c			
 
 # Add directory prefix
 SRCS_ALIAS	:= $(addprefix $(SRCSDIR)/$(ALIASDIR)/, $(SRCS_ALIAS))
