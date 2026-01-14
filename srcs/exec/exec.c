@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:36:20 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/14 13:11:41 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:40:21 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	execute_ast(t_ast *root, t_env_table *env)
 		return (handle_and(root, env));
 	if (root->type == NODE_OR)
 		return (handle_or(root, env));
+	if (root->type == NODE_SUB)
+		return (execute_sub(root, env));
 	return (1);
 }
 

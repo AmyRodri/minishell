@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:32:19 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/13 16:29:15 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:41:39 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ char	*resolve_path(char *cmd, t_env_table *env);
 /* ========== CMD ========== */
 
 int		execute_cmd(t_ast *cmd_node, t_env_table *env);
+
+
+int		execute_sub(t_ast *root, t_env_table *env);
+
 
 #endif
