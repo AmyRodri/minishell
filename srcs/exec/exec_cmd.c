@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:11:46 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:12:38 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	execute_cmd(t_ast *cmd_node, t_env_table *env)
 		return (127);
 	}
 	status = exec_simple_command(cmd->redir, path_cmd, cmd->argv, env);
+	env_set(env, "_", path_cmd);
 	free(path_cmd);
 	return (status);
 }
