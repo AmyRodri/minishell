@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:30:19 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/28 17:23:36 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:01:35 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,22 @@ typedef struct s_op
 	t_token_type	type;
 }	t_op;
 
-// lexer_operetor.c
+/* ========== LEXER OPERETOR ========== */
+
 t_token	*tokenize_operetor(const char *s, int *i);
 
-// lexer.c
+/* ========== LEXER ========== */
+
 int		isopertor(const char *s, int i);
 t_token	*lexer(const char *s);
 t_token	*new_token(t_token_type type, char *value);
 
-// lexer_word.c
+/* ========== LEXER WORD ========== */
+
 t_token	*tokenize_word(const char *s, int *i);
 
-// lexer_utils.c
+/* ========== LEXER UTILS ========== */
+
 void	print_tokens(t_token *list);
 
 #endif

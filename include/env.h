@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:02:58 by amyrodri          #+#    #+#             */
-/*   Updated: 2025/12/03 13:32:33 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:15:15 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,22 @@ typedef struct s_env_table
 	size_t	size;
 }	t_env_table;
 
-// env.c
+/* ========== ENV ========== */
+
 unsigned long	hash(char *str);
+t_env			*env_new(char *key, char *value);
+char			**env_export(t_env_table *table);
+
+/* ========== ENV INIT ========== */
 
 t_env_table		*env_init(size_t size, char **envp);
 void			env_destroy(t_env_table *table);
 
-t_env			*env_new(char *key, char *value);
+
+/* ========== ENV TABLE ========== */
 
 void			env_set(t_env_table *table, char *key, char *value);
 void			env_unset(t_env_table *table, char *key);
 char			*env_get(t_env_table *table, char *key);
-
-char			**env_export(t_env_table *table);
 
 #endif

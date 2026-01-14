@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 23:36:55 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/08 17:02:02 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/14 12:02:31 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,28 @@
 
 typedef struct s_env_table	t_env_table;
 
-/* Prompt */
+/* ========== PROMPT ========== */
 
 void	init_ps1(t_env_table *env);
 char	*get_prompt(t_env_table *env);
 
-/* Parsing */
+/* ========== PARSING ========== */
 
 char	*parse_ps1(t_env_table *env, char *line);
 char	*skip_whitespace(char *s);
 
-/* Expansion */
+/* ========== EXPANSION ========== */
 
 char	*interpret_vars(t_env_table *env, char *s);
 char	*resolve_prompt_token(t_env_table *env, char *s, int *i);
 
-/* Utils */
+/* ========== UTILS ========== */
 
 char	*cwd_with_tilde(t_env_table *env);
 char	*expand_cwd(t_env_table *env, char limit);
 void	prompt_default(t_env_table *env);
 
-/* Length */
+/* ========== LENGTH ========== */
 
 size_t	prompt_len(t_env_table *env, char *s);
 

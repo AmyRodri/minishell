@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 13:28:09 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:39:50 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ typedef enum s_token_type	t_token_type;
 typedef struct s_token		t_token;
 typedef enum s_token_type	t_token_type;
 
+/* ========== PARSER ========== */
+
 t_ast						*parser(t_token *tokens);
 int							check_syntax(t_token *tokens);
+
+/* ========== AST TREE ========== */
 
 t_ast						*parse_sequence(t_token **tokens);
 t_ast						*parse_or(t_token **tokens);
@@ -73,6 +77,8 @@ t_ast						*parse_simple(t_token **tokens);
 t_ast						*parse_subshell(t_token **tokens);
 t_redir_type				redir_type(t_token_type type);
 t_ast						*parse_command(t_token **tokens);
+
+/* ========== PARSER UTILS ========== */
 
 int							token_op(t_token_type token);
 int							check_in_end(t_token *start, t_token *end);

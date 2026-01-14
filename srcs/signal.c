@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 16:54:01 by kamys             #+#    #+#             */
-/*   Updated: 2025/11/24 16:10:15 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:42:32 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static volatile sig_atomic_t	g_signal_status;
 
-int	get_singal(void)
+int	get_signal(void)
 {
 	return (g_signal_status);
 }

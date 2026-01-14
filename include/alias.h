@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alias.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 23:46:01 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/10 22:56:48 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/14 13:23:01 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,20 @@ typedef struct s_alias_table
 	size_t			size;
 }	t_alias_table;
 
+/* ========== ALIAS ========== */
+
 t_alias_table	*init_alias(size_t size);
 char			**alias_export(t_alias_table *table);
-t_alias			*alias_new(char *key, char *value);
+
+/* ========== ALIAS TABLE ========== */
+
 void			alias_set(t_alias_table *table, char *key, char *value);
 void			alias_unset(t_alias_table *table, char *key);
 char			*alias_get(t_alias_table *table, char *key);
+
+/* ========== ALIAS NEW ========== */
+
+t_alias			*alias_new(char *key, char *value);
 void			alias_destroy(t_alias_table *table);
 
 #endif
