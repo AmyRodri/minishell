@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 04:05:57 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/13 16:30:24 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:28:15 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*resolve_path(char *cmd, t_env_table *env)
 	int		i;
 
 	if (access(cmd, X_OK) == 0)
-		return (cmd);
+		return (ft_strdup(cmd));
 	path_envp = env_get(env, "PATH");
 	paths = ft_split(path_envp, ':');
 	i = 0;

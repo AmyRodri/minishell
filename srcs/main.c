@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:29:53 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:12:16 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv, char **envp)
 		return (status);
 	}
 	setup_sig();
+	shell_upadate(sh);
 	init_ps1(sh->env);
 	sh->aliases = init_alias(97);
 	if (argc >= 3)
