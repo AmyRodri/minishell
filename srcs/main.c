@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/22 12:12:04 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:12:14 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int argc, char **argv, char **envp)
 		return (status);
 	}
 	setup_sig();
+	shell_upadate(sh);
 	init_ps1(sh->env);
 	sh->aliases = init_alias(97);
 	if (argc >= 3)
