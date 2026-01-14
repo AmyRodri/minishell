@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/13 16:29:33 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/15 11:34:40 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,21 @@ typedef struct s_shell
 	int				last_status;
 }	t_shell;
 
+/* ========== INPUT ========== */
+
 void	input(char	*line, t_shell *sh);
+
+/* ========== FREE ========== */
+
 void	free_tokens(t_token *tok);
 void	free_redir(t_redir *r);
 void	free_cmd(t_cmd *cmd);
 void	free_ast(t_ast *root);
 void	clean_up(t_shell *sh);
-// signal.c
-int		get_singal(void);
+
+/* ========== SIGNAL ========== */
+
+int		get_signal(void);
 void	reset_signal(void);
 void	handler(int sig);
 void	setup_sig(void);
