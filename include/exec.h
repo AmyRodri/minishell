@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:32:19 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/13 15:32:59 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 17:54:32 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 # include "minishell.h"
 
+# define INTERRUPTED_BY_SIGINT 130
+
 typedef struct s_ast		t_ast;
 typedef struct s_redir		t_redir;
 typedef enum s_node_type	t_node_type;
 typedef enum s_redir_type	t_redir_type;
 typedef struct s_cmd		t_cmd;
+typedef struct s_shell		t_shell;
 
 /* ========== EXEC ========== */
 
@@ -48,5 +51,12 @@ char	*resolve_path(char *cmd, t_env_table *env);
 /* ========== CMD ========== */
 
 int		execute_cmd(t_ast *cmd_node, t_env_table *env);
+
+/* ========== HEREDOC/UTILS ========== */
+
+int		exec_heredoc(t_redir *redir, t_shell *sh);
+int		is_delimiter(char *line, char *delimiter);
+int		check_if_quoted(char *delimiter);
+char	*expand_variables_in_heredoc(char *line, t_shell *sh);
 
 #endif

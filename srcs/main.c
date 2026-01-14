@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/11 20:55:48 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/14 17:55:53 by cassunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ void	input(char	*line, t_shell *sh)
 	ast_root = parser(token);
 	expand_alias_ast(ast_root, sh);
 	expand_ast(ast_root, sh->env);
+	if (exec_heredoc((t_redir *)ast_root, sh) == INTERRUPTED_BY_SIGINT)
+		return ;
 	if (ast_root)
 		sh->last_status = execute_ast(ast_root, sh->env);
 	free_ast(ast_root);
 	free_tokens(token);
+	unlink(".heredoc_tmp");
 }
 
 int	run_interactive_shell(t_shell *sh)
