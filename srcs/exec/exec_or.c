@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   exec_or.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:29:12 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/08 15:21:32 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:43:29 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	handle_or(t_ast *root, t_env_table *env)
+int	handle_or(t_ast *root, t_shell *sh)
 {
 	int	status;
 
-	status = execute_ast(root->left, env);
+	status = execute_ast(root->left, sh);
 	if (status != 0)
-		return (execute_ast(root->right, env));
+		return (execute_ast(root->right, sh));
 	return (status);
 }

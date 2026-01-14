@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:26:40 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/08 15:21:30 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:36:43 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	close_fd(int fd1, int fd2)
 		close(fd2);
 }
 
-int	handle_pipe(t_ast *root, t_env_table *env)
+int	handle_pipe(t_ast *root, t_shell *sh)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -32,14 +32,14 @@ int	handle_pipe(t_ast *root, t_env_table *env)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close_fd(fd[0], fd[1]);
-		exit(execute_ast(root->left, env));
+		exit(execute_ast(root->left, sh));
 	}
 	pid = fork();
 	if (pid == 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
 		close_fd(fd[0], fd[1]);
-		exit(execute_ast(root->right, env));
+		exit(execute_ast(root->right, sh));
 	}
 	close_fd(fd[0], fd[1]);
 	waitpid(-1, NULL, 0);

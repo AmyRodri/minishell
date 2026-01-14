@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/22 12:15:18 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:15:36 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	input(char	*line, t_shell *sh)
 		return ;
 	}
 	if (ast_root)
-		sh->last_status = execute_ast(ast_root, sh->env);
+		sh->last_status = execute_ast(ast_root, sh);
 	free_ast(ast_root);
 	free_tokens(token);
 	unlink(".heredoc_tmp");

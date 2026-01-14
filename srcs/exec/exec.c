@@ -6,13 +6,13 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:36:20 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:15:12 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:15:49 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	execute_ast(t_ast *root, t_env_table *env)
+int	execute_ast(t_ast *root, t_shell *sh)
 {
 	if (!root)
 		return (0);
@@ -25,9 +25,9 @@ int	execute_ast(t_ast *root, t_env_table *env)
 	else if (root->type == NODE_OR)
 		return (handle_or(root, env));
 	if (root->type == NODE_SUB)
-		return (execute_sub(root, env));
+		return (execute_sub(root, sh));
 	if (root->type == NODE_SEQ)
-		return (handle_sequence(root, env));
+		return (handle_sequence(root, sh));
 	return (1);
 }
 

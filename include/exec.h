@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:32:19 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:15:09 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:15:32 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_shell		t_shell;
 
 /* ========== EXEC ========== */
 
-int		execute_ast(t_ast *root, t_env_table *env);
+int		execute_ast(t_ast *root, t_shell *sh);
 int		exec_simple_command(t_redir *redir, char *path_cmd,
 			char **av, t_env_table *env);
 
@@ -40,9 +40,9 @@ int		apply_redirect(t_redir *redirs);
 
 /* ========== PIPE/AND/OR ========== */
 
-int		handle_pipe(t_ast *root, t_env_table *env);
-int		handle_and(t_ast *root, t_env_table *env);
-int		handle_or(t_ast *root, t_env_table *env);
+int		handle_pipe(t_ast *root, t_shell *sh);
+int		handle_and(t_ast *root, t_shell *sh);
+int		handle_or(t_ast *root, t_shell *sh);
 
 /* ========== PATH ========== */
 
@@ -50,7 +50,7 @@ char	*resolve_path(char *cmd, t_env_table *env);
 
 /* ========== CMD ========== */
 
-int		execute_cmd(t_ast *cmd_node, t_env_table *env);
+int		execute_cmd(t_ast *cmd_node, t_shell *sh);
 
 /* ========== HEREDOC/UTILS ========== */
 
