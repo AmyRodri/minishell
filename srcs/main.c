@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/14 13:53:45 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:35:36 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	input(char	*line, t_shell *sh)
 	expand_alias_ast(ast_root, sh);
 	expand_ast(ast_root, sh->env);
 	if (ast_root)
-		sh->last_status = execute_ast(ast_root, sh->env);
+		sh->last_status = execute_ast(ast_root, sh);
 	free_ast(ast_root);
 	free_tokens(token);
 }
