@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:17:49 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:18:11 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ static int	is_builtin(char **av)
 		|| ft_strcmp(av[0], "exit") == 0)
 		return (1);
 	return (0);
-}
-
-void	ft_exit(t_shell *sh, t_cmd *cmd)
-{
-	(void)cmd;
-	sh->should_exit = 1;
-	sh->exit_code = 1;
 }
 
 static int	execute_builtin(t_cmd *cmd, t_shell *sh)

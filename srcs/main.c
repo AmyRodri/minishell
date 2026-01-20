@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/22 12:17:45 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:18:06 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ void	run_interactive_shell(t_shell *sh)
 		line = readline(prompt);
 		free(prompt);
 		if (!line)
+		{
+			ft_putendl_fd("exit", STDOUT_FILENO);
+			sh->exit_code = sh->last_status;
+			sh->should_exit = 1;
 			break ;
+		}
 		if (*line)
 			add_history(line);
 		input(line, sh);
@@ -58,7 +63,6 @@ void	run_interactive_shell(t_shell *sh)
 	}
 	exit_code = sh->exit_code;
 	clean_up(sh);
-	printf("exit\n");
 	exit(exit_code);
 }
 

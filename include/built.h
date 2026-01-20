@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:00:29 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:17:16 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:18:02 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_env_table		t_env_table;
 typedef struct s_alias_table	t_alias_table;
 typedef struct s_cmd			t_cmd;
+typedef struct s_shell			t_shell;
 
 /* ========== UTILS ===================== */
 
@@ -41,5 +42,6 @@ void	cd(t_env_table *env, t_cmd *path);
 void	alias(t_alias_table *alias, t_cmd *cmd);
 void	display_alias(t_alias_table *alias);
 void	unalias(t_alias_table *alias, t_cmd *cmd);
+void	ft_exit(t_shell *sh, t_cmd *cmd);
 
 #endif
