@@ -6,13 +6,13 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:09:13 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/22 12:11:43 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:29 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-void	pwd(t_env_table *env, t_cmd *cmd)
+int	pwd(t_env_table *env, t_cmd *cmd)
 {
 	char	*cwd;
 
@@ -20,10 +20,12 @@ void	pwd(t_env_table *env, t_cmd *cmd)
 	(void)cmd;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		perror("pwd");
-	else
 	{
-		printf("%s\n", cwd);
-		free(cwd);
+		ft_putstr_fd("pwd: error retrieving current directory: ", STDIN_FILENO);
+		ft_putstr_fd("getcwd: cannot access parent directories\n", STDIN_FILENO);
+		return (1);
 	}
+	printf("%s\n", cwd);
+	free(cwd);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:51:35 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:06:30 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:12 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	is_flag(char *flag)
 	return (i > 1);
 }
 
-void	echo(t_env_table *env, t_cmd *cmd)
+int	echo(t_env_table *env, t_cmd *cmd)
 {
 	int	i;
 	int	flag_n;
 
 	(void)env;
 	if (!cmd || !cmd->argv)
-		return ;
+		return (1);
 	i = 1;
 	flag_n = 0;
 	while (cmd->argv[i] && is_flag(cmd->argv[i]))
@@ -52,4 +52,5 @@ void	echo(t_env_table *env, t_cmd *cmd)
 	}
 	if (!flag_n)
 		write(1, "\n", 1);
+	return (0);
 }

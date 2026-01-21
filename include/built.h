@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:00:29 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:18:02 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:01 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ int		is_append(char *s);
 
 /* ========== BUILT OPERATIONS ========== */
 
+void	display_export(t_env_table *env);
+void	display_alias(t_alias_table *alias);
+
 /* ========== BUILT OPERATIONS ========== */
 
-void	display_export(t_env_table *env);
-void	print_env(t_env_table *env, t_cmd *cmd);
-void	export(t_env_table *env, t_cmd *cmd);
-void	unset(t_env_table *env, t_cmd *cmd);
-void	echo(t_env_table *env, t_cmd *cmd);
-void	pwd(t_env_table *env, t_cmd *cmd);
-void	cd(t_env_table *env, t_cmd *path);
-void	alias(t_alias_table *alias, t_cmd *cmd);
-void	display_alias(t_alias_table *alias);
-void	unalias(t_alias_table *alias, t_cmd *cmd);
-void	ft_exit(t_shell *sh, t_cmd *cmd);
+int		cd(t_env_table *env, t_cmd *path);
+int		echo(t_env_table *env, t_cmd *cmd);
+int		print_env(t_env_table *env, t_cmd *cmd);
+int		export(t_env_table *env, t_cmd *cmd);
+int		pwd(t_env_table *env, t_cmd *cmd);
+int		unset(t_env_table *env, t_cmd *cmd);
+int		alias(t_alias_table *alias, t_cmd *cmd);
+int		unalias(t_alias_table *alias, t_cmd *cmd);
+int		ft_exit(t_shell *sh, t_cmd *cmd);
 
 #endif

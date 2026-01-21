@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:28:05 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:17:33 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:25 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	apply_export(t_env_table *env, char *key, char *value, int append)
 	free(new);
 }
 
-static void	handle_export(t_env_table *env, char *s)
+static int	handle_export(t_env_table *env, char *s)
 {
 	char	*key;
 	char	*value;
@@ -77,27 +77,35 @@ static void	handle_export(t_env_table *env, char *s)
 		ft_putstr_fd(": not a valid identifier\n", 2);
 		free(key);
 		free(value);
-		return ;
+		return (1);
 	}
 	if (!ft_strchr(s, '='))
 	{
 		if (!env_get(env, key))
 			env_set(env, key, ft_strdup(""));
-		free(key);
-		return ;
+		return (free(key), 0);
 	}
 	apply_export(env, key, value, append);
 	free(key);
 	free(value);
+	return (0);
 }
 
-void	export(t_env_table *env, t_cmd *cmd)
+int	export(t_env_table *env, t_cmd *cmd)
 {
 	int	i;
+	int	status;
+	int	ret;
 
 	i = 1;
+	ret = 0;
 	if (!cmd->argv[i])
-		return (display_export(env));
+		return (display_export(env), 0);
 	while (cmd->argv[i])
-		handle_export(env, cmd->argv[i++]);
+	{
+		status = handle_export(env, cmd->argv[i++]);
+		if (status != 0)
+			ret = 1;
+	}
+	return (ret);
 }

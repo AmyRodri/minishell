@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:48:48 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:06:25 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:06 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,34 @@ static void	set_pwd_oldpwd(t_env_table *env, char *pwd, char *old_pwd)
 	env_set(env, "PWD", pwd);
 }
 
-static void	cd_path(t_env_table *env, char *path)
+static int	cd_path(t_env_table *env, char *path)
 {
 	char	*cwd;
 	char	*old_pwd;
 
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
-		return (perror("cd"));
+		return (perror("cd"), 1);
 	if (chdir(path) == -1)
 	{
 		printf("cd: %s: No such file or directory\n", path);
 		free(old_pwd);
-		return ;
+		return (1);
 	}
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
 		perror("cd");
 		free(old_pwd);
-		return ;
+		return (1);
 	}
 	set_pwd_oldpwd(env, cwd, old_pwd);
 	free(old_pwd);
 	free(cwd);
+	return (0);
 }
 
-static void	cd_dash(t_env_table *env)
+static int	cd_dash(t_env_table *env)
 {
 	char	*cwd;
 	char	*old_pwd;
@@ -54,26 +55,21 @@ static void	cd_dash(t_env_table *env)
 	if (!old_pwd)
 	{
 		ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
-		return ;
+		return (1);
 	}
 	pwd = env_get(env, "PWD");
 	if (chdir(old_pwd) == -1)
-	{
-		perror("cd");
-		return ;
-	}
+		return (perror("cd"), 1);
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-	{
-		perror("cd");
-		return ;
-	}
+		return (perror("cd"), 1);
 	printf("%s\n", cwd);
 	set_pwd_oldpwd(env, cwd, pwd);
 	free(cwd);
+	return (0);
 }
 
-static void	cd_home(t_env_table *env)
+static int	cd_home(t_env_table *env)
 {
 	char	*cwd;
 	char	*old_pwd;
@@ -83,31 +79,26 @@ static void	cd_home(t_env_table *env)
 	if (!home)
 	{
 		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
-		return ;
+		return (1);
 	}
 	old_pwd = getcwd(NULL, 0);
 	if (chdir(home) == -1)
-	{
-		free(old_pwd);
-		return (perror("cd"));
-	}
+		return (free(old_pwd), perror("cd"), 1);
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-	{
-		free(old_pwd);
-		return (perror("cd"));
-	}
+		return (free(old_pwd), perror("cd"), 1);
 	set_pwd_oldpwd(env, cwd, old_pwd);
 	free(cwd);
 	free(old_pwd);
+	return (0);
 }
 
-void	cd(t_env_table *env, t_cmd *cmd)
+int	cd(t_env_table *env, t_cmd *cmd)
 {
 	if (!cmd->argv[1] || !ft_strcmp(cmd->argv[1], "~"))
-		cd_home(env);
+		return (cd_home(env));
 	else if (!ft_strcmp(cmd->argv[1], "-"))
-		cd_dash(env);
+		return (cd_dash(env));
 	else
-		cd_path(env, cmd->argv[1]);
+		return (cd_path(env, cmd->argv[1]));
 }

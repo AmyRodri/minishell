@@ -3,49 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   built_unalias.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 11:41:52 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/18 11:48:11 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/21 16:24:58 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-static int	is_valid_key(char *s)
+int	unalias(t_alias_table *alias, t_cmd *cmd)
 {
 	int	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i] && s[i] != '=')
-	{
-		if (s[i] == ' ' && s[i] == '\t')
-			return (0);
-		i++;
-	}
-	if (i == 0 && s[i] != '=')
-		return (0);
-	return (1);
-}
-
-void	unalias(t_alias_table *alias, t_cmd *cmd)
-{
-	int	i;
+	int	ret;
 
 	i = 1;
+	ret = 0;
 	while (cmd->argv[i])
 	{
-		if (!is_valid_key(cmd->argv[i]))
+		if (!alias_get(alias, cmd->argv[i]))
 		{
 			ft_putstr_fd("unalias: ", 2);
 			ft_putstr_fd(cmd->argv[i], 2);
-			ft_putstr_fd(": not a valid identifier\n", 2);
+			ft_putstr_fd(": not found\n", 2);
 			i++;
+			ret = 1;
 			continue ;
 		}
 		alias_unset(alias, cmd->argv[i]);
 		i++;
 	}
+	return (ret);
 }

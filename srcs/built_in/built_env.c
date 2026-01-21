@@ -6,13 +6,13 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 12:59:58 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:11:35 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:16 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-void	print_env(t_env_table *env, t_cmd *cmd)
+int	print_env(t_env_table *env, t_cmd *cmd)
 {
 	t_env	*curr;
 	size_t	i;
@@ -29,4 +29,5 @@ void	print_env(t_env_table *env, t_cmd *cmd)
 			curr = curr->next;
 		}
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:18:32 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:19:37 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,24 @@ static int	is_builtin(char **av)
 static int	execute_builtin(t_cmd *cmd, t_shell *sh)
 {
 	if (ft_strcmp(cmd->argv[0], "cd") == 0)
-		cd(sh->env, cmd);
+		return (cd(sh->env, cmd));
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
-		echo(sh->env, cmd);
+		return (echo(sh->env, cmd));
 	if (ft_strcmp(cmd->argv[0], "env") == 0)
-		print_env(sh->env, cmd);
+		return (print_env(sh->env, cmd));
 	if (ft_strcmp(cmd->argv[0], "export") == 0)
-		export(sh->env, cmd);
+		return (export(sh->env, cmd));
 	if (ft_strcmp(cmd->argv[0], "pwd") == 0)
-		pwd(sh->env, cmd);
+		return (pwd(sh->env, cmd));
 	if (ft_strcmp(cmd->argv[0], "unset") == 0)
-		unset(sh->env, cmd);
+		return (unset(sh->env, cmd));
 	if (ft_strcmp(cmd->argv[0], "alias") == 0)
-		alias(sh->aliases, cmd);
+		return (alias(sh->aliases, cmd));
 	if (ft_strcmp(cmd->argv[0], "unalias") == 0)
-		unalias(sh->aliases, cmd);
+		return (unalias(sh->aliases, cmd));
 	if (ft_strcmp(cmd->argv[0], "exit") == 0)
-		ft_exit(sh, cmd);
-	return (0);
+		return (ft_exit(sh, cmd));
+	return (69);
 }
 
 int	execute_cmd(t_ast *cmd_node, t_shell *sh)

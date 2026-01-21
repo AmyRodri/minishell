@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 12:58:03 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/20 12:59:52 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:26:16 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int	ft_is_numeric(const char *s)
 	return (1);
 }
 
-void	ft_exit(t_shell *sh, t_cmd *cmd)
+int	ft_exit(t_shell *sh, t_cmd *cmd)
 {
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmd->argc == 1)
 	{
 		sh->exit_code = sh->last_status;
 		sh->should_exit = 1;
-		return ;
+		return (0);
 	}
 	if (!ft_is_numeric(cmd->argv[1]))
 	{
@@ -38,14 +38,15 @@ void	ft_exit(t_shell *sh, t_cmd *cmd)
 			STDERR_FILENO);
 		sh->exit_code = 255;
 		sh->should_exit = 1;
-		return ;
+		return (0);
 	}
 	if (cmd->argc > 2)
 	{
 		ft_putendl_fd("Minishell: exit: too many arguments",
 			STDERR_FILENO);
-		return ;
+		return (1);
 	}
 	sh->exit_code = ft_atoi(cmd->argv[1]) % 256;
 	sh->should_exit = 1;
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_alias.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:21:20 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/18 11:51:40 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/21 16:19:02 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	parse_alias(char *s, char **key, char **value)
 	*value = ft_strdup(eq + 1);
 }
 
-static void	handle_alias(t_alias_table *alias, char *s)
+static int	handle_alias(t_alias_table *alias, char *s)
 {
 	char	*key;
 	char	*value;
@@ -58,7 +58,7 @@ static void	handle_alias(t_alias_table *alias, char *s)
 		ft_putstr_fd(": not a valid identifier\n", 2);
 		free(key);
 		free(value);
-		return ;
+		return (1);
 	}
 	if (!ft_strchr(s, '='))
 	{
@@ -66,20 +66,29 @@ static void	handle_alias(t_alias_table *alias, char *s)
 		if (value)
 			printf("alias %s='%s'\n", key, value);
 		free(key);
-		return ;
+		return (0);
 	}
 	alias_set(alias, key, value);
 	free(key);
 	free(value);
+	return (0);
 }
 
-void	alias(t_alias_table *alias, t_cmd *cmd)
+int	alias(t_alias_table *alias, t_cmd *cmd)
 {
 	int	i;
+	int	status;
+	int	ret;
 
 	i = 1;
+	ret = 0;
 	if (!cmd->argv[i])
-		return (display_alias(alias));
+		return (display_alias(alias), 0);
 	while (cmd->argv[i])
-		handle_alias(alias, cmd->argv[i++]);
+	{
+		status = handle_alias(alias, cmd->argv[i++]);
+		if (status != 0)
+			ret = 1;
+	}
+	return (ret);
 }
