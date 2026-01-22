@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:06:48 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/21 15:11:47 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:49:06 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static void	run_heredoc_loop(int fd, char *delim, t_shell *sh, int expand)
 {
 	char	*line;
-	int		len;
-	
-	len = ft_strlen(delim);
+
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
@@ -25,10 +23,10 @@ static void	run_heredoc_loop(int fd, char *delim, t_shell *sh, int expand)
 		if (!line)
 			break ;
 		if (is_delimiter(line, delim))
-        {
-            free(line);
-            break ;
-        }
+		{
+			free(line);
+			break ;
+		}
 		if (expand)
 			line = expand_variables_in_heredoc(line, sh);
 		ft_putstr_fd(line, fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:26:52 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/20 16:01:52 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:56:01 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	apply_redirect(t_redir *redir)
 
 	while (redir)
 	{
-		fd = -1;	
+		fd = -1;
 		if (redir->type == REDIR_IN)
 			fd = open(redir->file, O_RDONLY);
 		else if (redir->type == REDIR_OUT)

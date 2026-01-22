@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/21 13:54:48 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:51:45 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ t_ast						*parse_command(t_token **tokens);
 int							token_op(t_token_type token);
 int							check_in_end(t_token *start, t_token *end);
 int							check_inside(t_token *head, t_token *end);
-void 						add_redir_back(t_redir **list, t_redir *new);
+void						add_redir_back(t_redir **list, t_redir *new);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 23:51:43 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/21 13:54:24 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:58:44 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,17 @@ t_redir_type	redir_type(t_token_type type)
 	return (REDIR_APPEND);
 }
 
-void add_redir_back(t_redir **list, t_redir *new)
+void	add_redir_back(t_redir **list, t_redir *new)
 {
-    t_redir *last;
+	t_redir	*last;
 
-    if (!*list)
-    {
-        *list = new;
-        return;
-    }
-    last = *list;
-    while (last->next)
-        last = last->next;
-    last->next = new;
+	if (!*list)
+	{
+		*list = new;
+		return ;
+	}
+	last = *list;
+	while (last->next)
+		last = last->next;
+	last->next = new;
 }
-

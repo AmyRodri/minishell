@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:02:58 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/14 13:15:15 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:51:34 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char			**env_export(t_env_table *table);
 
 t_env_table		*env_init(size_t size, char **envp);
 void			env_destroy(t_env_table *table);
-
 
 /* ========== ENV TABLE ========== */
 

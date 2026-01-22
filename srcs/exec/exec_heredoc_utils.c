@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:01:42 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/21 15:12:10 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:56:57 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int is_delimiter(char *line, char *delimiter)
+int	is_delimiter(char *line, char *delimiter)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && delimiter[i] && line[i] == delimiter[i])
@@ -67,6 +67,7 @@ static char	*extract_and_replace_var(char *str, t_shell *sh, int *global_i)
 	*global_i += len;
 	return (value);
 }
+
 char	*expand_variables_in_heredoc(char *line, t_shell *sh)
 {
 	int		i;
@@ -76,10 +77,10 @@ char	*expand_variables_in_heredoc(char *line, t_shell *sh)
 
 	i = 0;
 	new_line = ft_strdup("");
-	while(line[i])
+	while (line[i])
 	{
-		if (line[i] == '$' && line[i + 1] && (ft_isalnum(line[i + 1]) ||
-				line[i + 1] == '_' || line[i + 1] == '?'))
+		if (line[i] == '$' && line[i + 1] && (ft_isalnum(line[i + 1])
+				|| line[i + 1] == '_' || line[i + 1] == '?'))
 			tmp = extract_and_replace_var(&line[i], sh, &i);
 		else
 			tmp = ft_substr(line, i++, 1);

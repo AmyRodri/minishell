@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/21 14:43:36 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:52:32 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	input(char	*line, t_shell *sh)
 {
 	t_token	*token;
 	t_ast	*ast_root;
-
 
 	token = lexer(line);
 	if (!token)

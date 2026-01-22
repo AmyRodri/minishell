@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:16 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/21 13:59:59 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:40:02 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,16 @@ t_ast	*new_node(t_node_type type, t_ast *left, t_ast *right, void *content)
 t_ast	*parse_command(t_token **tokens)
 {
 	t_token_type	type;
-	t_redir			*redir;
 	t_cmd			*cmd;
 
-	redir = NULL;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	while (*tokens)
 	{
 		type = (*tokens)->type;
 		if (is_stop_token(type))
 			break ;
-		if (type == TK_REDIR_IN || type == TK_REDIR_OUT || type == TK_APPEND || type == TK_HEREDOC)
+		if (type == TK_REDIR_IN || type == TK_REDIR_OUT
+			|| type == TK_APPEND || type == TK_HEREDOC)
 		{
 			add_redir_back(&cmd->redir, redirs(tokens, type));
 			continue ;
