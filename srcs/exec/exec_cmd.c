@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:19:37 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 18:21:01 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,31 @@ static int	execute_builtin(t_cmd *cmd, t_shell *sh)
 		return (unalias(sh->aliases, cmd));
 	if (ft_strcmp(cmd->argv[0], "exit") == 0)
 		return (ft_exit(sh, cmd));
-	return (69);
+	return (127);
+}
+
+static void	restore_fds(int in, int out)
+{
+	dup2(in, STDIN_FILENO);
+	dup2(out, STDOUT_FILENO);
+	close(in);
+	close(out);
+}
+
+static int	quero_injustica(t_cmd *cmd, t_shell *sh)
+{
+	int	status;
+	int	stdin_bakcup;
+	int	stdout_bakcup;
+
+	stdin_bakcup = dup(STDIN_FILENO);
+	stdout_bakcup = dup(STDOUT_FILENO);
+	if (cmd->redir)
+		if (apply_redirect(cmd->redir) < 0)
+			return (restore_fds(stdin_bakcup, stdout_bakcup), 1);
+	status = execute_builtin(cmd, sh);
+	restore_fds(stdin_bakcup, stdout_bakcup);
+	return (status);
 }
 
 int	execute_cmd(t_ast *cmd_node, t_shell *sh)
@@ -58,7 +82,7 @@ int	execute_cmd(t_ast *cmd_node, t_shell *sh)
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
 	if (is_builtin(cmd->argv))
-		return (execute_builtin(cmd, sh));
+		return (quero_injustica(cmd, sh));
 	path_cmd = resolve_path(cmd->argv[0], sh->env);
 	if (!path_cmd)
 	{
