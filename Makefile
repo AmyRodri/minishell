@@ -201,6 +201,9 @@ fclean: clean
 	@$(MAKE) fclean $(RUNLIB) -s > /dev/null 2>&1
 	@printf "$(YELLOW)🗑️ Executable removed$(NC)\n"
 
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=readline.sup ./minishell
+
 re: fclean all
 
 .PHONY: all clean fclean re
