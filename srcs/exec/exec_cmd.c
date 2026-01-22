@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 19:05:37 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:31:10 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	restore_fds(int in, int out)
 	close(out);
 }
 
-static int	quero_injustica(t_cmd *cmd, t_shell *sh)
+static int	exec_builtin_with_redirect(t_cmd *cmd, t_shell *sh)
 {
 	int	status;
 	int	stdin_bakcup;
@@ -82,17 +82,15 @@ int	execute_cmd(t_ast *cmd_node, t_shell *sh)
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
 	if (is_builtin(cmd->argv))
-		return (quero_injustica(cmd, sh));
+		return (exec_builtin_with_redirect(cmd, sh));
 	path_cmd = resolve_path(cmd->argv[0], sh->env);
-	if (!path_cmd)
+	if (!path_cmd || !cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
 	{
-		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd("Minishell: '", 2);
 		ft_putstr_fd(cmd->argv[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
+		ft_putstr_fd("' : command not found\n", 2);
 		return (127);
 	}
-	if (!cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
-		return (127);
 	status = exec_simple_command(cmd->redir, path_cmd, cmd->argv, sh->env);
 	env_set(sh->env, "_", path_cmd);
 	free(path_cmd);

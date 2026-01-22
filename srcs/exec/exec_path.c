@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 04:05:57 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:12:18 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:08:31 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*resolve_path(char *cmd, t_env_table *env)
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	path_envp = env_get(env, "PATH");
+	if (!path_envp)
+		return (NULL);
 	paths = ft_split(path_envp, ':');
 	i = 0;
 	while (paths[i])
