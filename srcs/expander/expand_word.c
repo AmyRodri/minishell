@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 21:09:00 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/26 00:24:47 by kamys            ###   ########.fr       */
+/*   Updated: 2026/01/26 14:43:20 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ static void	scape_wildcard(char *s)
 	}
 }
 
+static int	with_quotes(char **res, char *s, int *i, t_shell *sh)
+{
+	int		quote;
+
+	quote = 0;
+	if (s[*i] == '\'')
+	{
+		handle_single_quotes(res, s, i);
+		quote = 1;
+	}
+	else if (s[*i] == '\"')
+	{
+		handle_double_quotes(res, s, i, sh);
+		quote = 1;
+	}
+	return (quote);
+}
+
 char	*expand_word(char *s, t_shell *sh)
 {
 	char	*res;
@@ -36,17 +54,8 @@ char	*expand_word(char *s, t_shell *sh)
 	quote = 0;
 	while (s[i])
 	{
-		if (s[i] == '\'')
-		{
-			handle_single_quotes(&res, s, &i);
-			quote = 1;
-		}
-		else if (s[i] == '\"')
-		{
-			handle_double_quotes(&res, s, &i, sh);
-			quote = 1;
-		}
-		else if (s[i] == '$')
+		quote = with_quotes(&res, s, &i, sh);
+		if (s[i] == '$')
 			handle_dolar(&res, s, &i, sh);
 		else if (s[i] == '~')
 			handle_tilde(&res, s, &i, sh);

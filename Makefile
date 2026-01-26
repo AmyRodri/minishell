@@ -98,6 +98,8 @@ SRCS_EXPAND	= expand_ast.c			\
 			  expand_tilde.c		\
 			  expand_utils.c		\
 			  expand_vars.c			\
+			  expand_wildcard.c		\
+			  expand_wc_utils.c		\
 			  expand_word.c
 
 SRCS_ALIAS	= alias_init.c			\
@@ -118,16 +120,6 @@ SRCS_EXEC	= exec.c				\
 			  exec_heredoc.c		\
 			  exec_heredoc_utils.c	\
 			  exec_heredoc_utils2.c
-
-SRCS_EXPAND	= expand_ast.c			\
-			  expand_alias.c		\
-			  expand_cmd.c			\
-			  expand_quotes.c		\
-			  expand_redir.c		\
-			  expand_tilde.c		\
-			  expand_utils.c		\
-			  expand_vars.c			\
-			  expand_word.c
 
 SRCS_ALIAS	= alias_init.c			\
 			  alias_export.c		\
