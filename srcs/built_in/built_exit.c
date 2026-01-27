@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 12:58:03 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/21 16:26:16 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:44:34 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	}
 	sh->exit_code = ft_atoi(cmd->argv[1]) % 256;
 	sh->should_exit = 1;
-	return (0);
+	return (sh->exit_code);
 }

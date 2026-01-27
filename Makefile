@@ -194,7 +194,7 @@ fclean: clean
 	@printf "$(YELLOW)🗑️ Executable removed$(NC)\n"
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=readline.sup ./minishell
+	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=readline.sup ./minishell
 
 re: fclean all
 
