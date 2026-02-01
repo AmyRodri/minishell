@@ -43,6 +43,7 @@ SRCS_ENV	= hash.c				\
 SRCS_UTILS	= ft_isspace.c			\
 			  ft_strcmp.c			\
 			  shell_update.c		\
+			  set_title.c			\
 			  frees.c
 
 SRCS_LEXER	= lexer.c				\

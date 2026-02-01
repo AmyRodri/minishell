@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_update.c                                     :+:      :+:    :+:   */
+/*   set_title.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 12:00:38 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/02/01 19:22:57 by kamys            ###   ########.fr       */
+/*   Created: 2026/02/01 19:21:37 by kamys             #+#    #+#             */
+/*   Updated: 2026/02/01 19:24:53 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	shell_upadate(t_shell *sh)
+void	set_terminal_title(char *title)
 {
-	char	*shlvl;
-	char	*new_shlvl;
-	char	*title;
-	int		lvl;
-
-	shlvl = env_get(sh->env, "SHLVL");
-	if (!shlvl)
-		lvl = 1;
-	else
-		lvl = ft_atoi(shlvl) + 1;
-	if (lvl < 0)
-		lvl = 1;
-	new_shlvl = ft_itoa(lvl);
-	env_set(sh->env, "SHLVL", new_shlvl);
-	env_set(sh->env, "SHELL", "minishell");
-	title = parse_ps1(sh->env, "%u@minishell:%d");
-	set_terminal_title(title);
-	free(title);
-	free(new_shlvl);
+	if (!title)
+		return ;
+	write(1, "\033]0;", 4);
+	write(1, title, ft_strlen(title));
+	write(1, "\007", 1);
 }
