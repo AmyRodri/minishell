@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:36:20 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 12:22:38 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/01 14:10:27 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ static void	exec_child(char *path_cmd, char **av, t_env_table *env)
 
 static int	wait_child(pid_t pid, int status)
 {
-	if (waitpid(pid, &status, 0) == -1)
+	int	sig;
+
+	while (waitpid(pid, &status, 0) == -1 && errno == EINTR)
+		;
+	if (WIFSIGNALED(status))
 	{
-		perror("Minishell: waitpid\n");
-		return (1);
+		sig = WTERMSIG(status);
+		if (sig == SIGQUIT)
+			write(2, "Quit (core dumped)\n", 19);
+		return (128 + sig);
 	}
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
@@ -75,11 +81,10 @@ int	exec_simple_command(t_redir *redir, char *path_cmd,
 	{
 		if (redir)
 			if (apply_redirect(redir) < 0)
-				return (0);
+				exit (1);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		exec_child(path_cmd, av, env);
 	}
-	else
-		if (wait_child(pid, status) == 1)
-			return (1);
-	return (0);
+	return (wait_child(pid, status));
 }

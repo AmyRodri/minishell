@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 12:58:03 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/27 15:44:34 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/01 14:25:18 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	ft_is_numeric(const char *s)
 
 int	ft_exit(t_shell *sh, t_cmd *cmd)
 {
-	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmd->argc == 1)
 	{
 		sh->exit_code = sh->last_status;
@@ -36,7 +35,7 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	{
 		ft_putendl_fd("Minishell: exit: numeric argument required",
 			STDERR_FILENO);
-		sh->exit_code = 255;
+		sh->exit_code = 2;
 		sh->should_exit = 1;
 		return (0);
 	}

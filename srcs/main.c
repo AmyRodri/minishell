@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/02/01 13:31:47 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/01 14:57:28 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	input(char	*line, t_shell *sh)
 	unlink(".heredoc_tmp");
 }
 
-static void	exit_coder(t_shell *sh)
+static int	exit_coder(t_shell *sh)
 {
-	ft_putendl_fd("exit", STDOUT_FILENO);
 	sh->exit_code = sh->last_status;
 	sh->should_exit = 1;
+	return (1);
 }
 
 static void	run_interactive_shell(t_shell *sh)
@@ -57,23 +57,21 @@ static void	run_interactive_shell(t_shell *sh)
 		prompt = get_prompt(sh->env);
 		line = readline(prompt);
 		free(prompt);
-		if (!line)
-		{
-			exit_coder(sh);
+		if (!line && exit_coder(sh))
 			break ;
-		}
 		if (*line)
 			add_history(line);
 		input(line, sh);
 		free(line);
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	exit_code = sh->exit_code;
 	clean_up(sh);
 	exit(exit_code);
 }
 
-static int	run_command_mode(char **argv, t_shell *sh)
+static void	run_command_mode(char **argv, t_shell *sh)
 {
 	if (!ft_strncmp(argv[1], "-c", 2))
 	{
@@ -82,7 +80,7 @@ static int	run_command_mode(char **argv, t_shell *sh)
 		exit (sh->last_status);
 	}
 	ft_putstr_fd("usage: minishell -c \"command\"\n", 2);
-	return (1);
+	exit (1);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -106,7 +104,7 @@ int	main(int argc, char **argv, char **envp)
 	sh->aliases = init_alias(97);
 	sh->should_exit = 0;
 	if (argc >= 3)
-		status = run_command_mode(argv, sh);
+		run_command_mode(argv, sh);
 	else if (isatty(STDIN_FILENO))
 		run_interactive_shell(sh);
 	return (status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:26:40 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/27 15:43:41 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/01 14:12:05 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	handle_pipe(t_ast *root, t_shell *sh)
 		close_fd(fd[0], fd[1]);
 		exit(execute_and_free(root, sh, root->left));
 	}
-	waitpid(pid[0], &status, 0);
 	pid[1] = fork();
 	if (pid[1] == 0)
 	{
@@ -54,6 +53,7 @@ int	handle_pipe(t_ast *root, t_shell *sh)
 		exit(execute_and_free(root, sh, root->right));
 	}
 	close_fd(fd[0], fd[1]);
+	waitpid(pid[0], &status, 0);
 	waitpid(pid[1], &status, 0);
 	return (WEXITSTATUS(status));
 }

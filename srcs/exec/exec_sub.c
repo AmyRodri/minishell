@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_sub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 13:34:09 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/27 15:30:43 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/01 13:53:00 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ int	execute_sub(t_ast *root, t_shell *sh)
 		clean_up(sh);
 		exit(ret);
 	}
-	waitpid(pid, &status, 0);
+	while (waitpid(pid, &status, 0) == -1 && errno == EINTR)
+		;
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));
 	return (1);
 }
