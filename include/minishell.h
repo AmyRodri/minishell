@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:23:31 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/26 15:35:51 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:33:17 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_shell
 {
 	t_env_table		*env;
 	t_alias_table	*aliases;
+	t_ast			*root;
 	int				last_status;
 	int				exit_code;
 	int				should_exit;

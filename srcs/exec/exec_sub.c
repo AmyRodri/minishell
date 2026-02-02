@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_sub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 13:34:09 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/02/01 13:53:00 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/02 17:36:20 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	execute_sub(t_ast *root, t_shell *sh)
 	if (pid == 0)
 	{
 		ret = execute_ast(root->left, sh);
-		free_ast(root);
+		free_ast(sh->root);
 		clean_up(sh);
 		exit(ret);
 	}

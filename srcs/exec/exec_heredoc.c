@@ -6,11 +6,26 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:06:48 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/26 15:06:07 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/02 18:19:42 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+static void	disable_echoctl(struct termios *old)
+{
+	struct termios	new;
+
+	tcgetattr(STDIN_FILENO, old);
+	new = *old;
+	new.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &new);
+}
+
+static void	restore_echoctl(struct termios *old)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, old);
+}
 
 static void	sig_handler_heredoc(int sig)
 {
@@ -48,9 +63,10 @@ static void	run_heredoc_loop(int fd, char *delim, t_shell *sh, int expand)
 
 int	exec_heredoc(t_redir *redir, t_shell *sh)
 {
-	int		fd;
-	int		exp;
-	char	*tmp;
+	struct termios	old_term;
+	int				fd;
+	int				exp;
+	char			*tmp;
 
 	if (!redir || !redir->file)
 		return (1);
@@ -61,9 +77,10 @@ int	exec_heredoc(t_redir *redir, t_shell *sh)
 	tmp = ft_strtrim(redir->file, " \"\'\t\n\r\v\f");
 	reset_signal();
 	signal(SIGINT, sig_handler_heredoc);
+	disable_echoctl(&old_term);
 	run_heredoc_loop(fd, tmp, sh, exp);
-	close(fd);
-	free(tmp);
+	restore_echoctl(&old_term);
+	close_free(fd, tmp);
 	setup_sig();
 	if (get_signal() == SIGINT)
 		return (INTERRUPTED_BY_SIGINT);

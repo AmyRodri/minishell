@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/02/01 19:23:23 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/02 17:34:12 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 static void	input(char	*line, t_shell *sh)
 {
 	t_token	*token;
-	t_ast	*ast_root;
 
 	reset_signal();
 	token = lexer(line);
 	if (!token)
 		return ;
-	ast_root = parser(token);
+	sh->root = parser(token);
 	free_tokens(token);
-	expand_alias_ast(ast_root, sh);
+	expand_alias_ast(sh->root, sh);
 	set_terminal_title(line);
-	if (traverse_ast_heredoc(ast_root, sh) == INTERRUPTED_BY_SIGINT)
+	if (traverse_ast_heredoc(sh->root, sh) == INTERRUPTED_BY_SIGINT)
 	{
-		free_ast(ast_root);
+		free_ast(sh->root);
 		reset_signal();
 		unlink(".heredoc_tmp");
 		return ;
 	}
-	if (ast_root)
-		sh->last_status = execute_ast(ast_root, sh);
-	free_ast(ast_root);
+	if (sh->root)
+		sh->last_status = execute_ast(sh->root, sh);
+	free_ast(sh->root);
 	unlink(".heredoc_tmp");
 }
 
@@ -104,6 +103,7 @@ int	main(int argc, char **argv, char **envp)
 	init_ps1(sh->env);
 	sh->aliases = init_alias(97);
 	sh->should_exit = 0;
+	sh->last_status = 0;
 	if (argc >= 3)
 		run_command_mode(argv, sh);
 	else if (isatty(STDIN_FILENO))

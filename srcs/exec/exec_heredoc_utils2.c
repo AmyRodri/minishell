@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:09:14 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/22 10:55:28 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/02 18:19:45 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ int	traverse_ast_heredoc(t_ast *node, t_shell *sh)
 	if (status != 0)
 		return (status);
 	return (traverse_ast_heredoc(node->right, sh));
+}
+
+void	close_free(int fd, char *tmp)
+{
+	close(fd);
+	free(tmp);
 }

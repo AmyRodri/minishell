@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:26:40 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/01 14:12:05 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/02 18:00:17 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	close_fd(int fd1, int fd2)
 		close(fd2);
 }
 
-static int	execute_and_free(t_ast *root, t_shell *sh, t_ast *side)
+static int	execute_and_free(t_ast *root, t_shell *sh)
 {
 	int		ret;
 
-	ret = execute_ast(side, sh);
-	free_ast(root);
+	ret = execute_ast(root, sh);
+	free_ast(sh->root);
 	clean_up(sh);
 	return (ret);
 }
@@ -43,14 +43,14 @@ int	handle_pipe(t_ast *root, t_shell *sh)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close_fd(fd[0], fd[1]);
-		exit(execute_and_free(root, sh, root->left));
+		exit(execute_and_free(root->left, sh));
 	}
 	pid[1] = fork();
 	if (pid[1] == 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
 		close_fd(fd[0], fd[1]);
-		exit(execute_and_free(root, sh, root->right));
+		exit(execute_and_free(root->right, sh));
 	}
 	close_fd(fd[0], fd[1]);
 	waitpid(pid[0], &status, 0);

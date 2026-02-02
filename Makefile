@@ -8,7 +8,7 @@ PURPLE		= \033[0;95m
 NC			= \033[0m
 
 cc			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g2
 INCLUDE		= -I libft/srcs/includes -I include
 
 RDFLAGS		= -lreadline -ltermcap -lncurses

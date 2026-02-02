@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:28:05 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:19:25 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/02 18:31:49 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	handle_export(t_env_table *env, char *s)
 	if (!ft_strchr(s, '='))
 	{
 		if (!env_get(env, key))
-			env_set(env, key, ft_strdup(""));
+			env_set(env, key, "");
 		return (free(key), 0);
 	}
 	apply_export(env, key, value, append);
