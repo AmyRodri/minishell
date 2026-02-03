@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:38:02 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/22 11:41:40 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/03 16:39:21 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ char	*skip_whitespace(char *s)
 	while (*s && ft_isspace(*s))
 		s++;
 	return (s);
+}
+
+void	mark_ansi_invisible(char **s, char **res, int *i, int *j)
+{
+	(*res)[(*j)++] = '\001';
+	(*res)[(*j)++] = 27;
+	*i += 4;
+	while ((*s)[*i] && (*s)[*i] != 'm')
+		(*res)[(*j)++] = (*s)[(*i)++];
+	if ((*s)[*i] == 'm')
+		(*res)[(*j)++] = (*s)[(*i)++];
+	(*res)[(*j)++] = '\002';
 }
 
 static char	*interpret_escapes(char *s)
@@ -34,10 +46,7 @@ static char	*interpret_escapes(char *s)
 	{
 		if (!ft_strncmp(&s[i], "\\x1b", 4))
 		{
-			res[j++] = '\001';
-			res[j++] = 27;
-			res[j++] = '\002';
-			i += 4;
+			mark_ansi_invisible(&s, &res, &i, &j);
 		}
 		else
 			res[j++] = s[i++];
