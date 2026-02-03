@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2026/01/22 12:16:34 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/03 17:16:43 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef struct s_cmd
 	t_redir					*redir;
 	int						alias_expanded;
 }							t_cmd;
-
-typedef enum s_token_type	t_token_type;
 
 typedef struct s_token		t_token;
 typedef enum s_token_type	t_token_type;

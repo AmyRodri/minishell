@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_syntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cassunca <cassunca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 14:37:31 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/20 14:28:46 by cassunca         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:08:52 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ int	handle_paren_open(t_token **head_ptr)
 	end = check_paren(head);
 	if (!end)
 		return (1);
+	if (end->next && !token_op(end->next->type)
+		&& end->next->type != TK_RPAREN)
+	{
+		printf("minishell: syntax error near unexpected token '%s'\n",
+			end->next->value);
+		return (1);
+	}
 	if (check_inside(head->next, end))
 		return (1);
 	*head_ptr = end->next;
