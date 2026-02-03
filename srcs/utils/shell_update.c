@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 12:00:38 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/02/01 19:22:57 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/03 12:03:03 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	shell_upadate(t_shell *sh)
 {
 	char	*shlvl;
 	char	*new_shlvl;
-	char	*title;
 	int		lvl;
 
 	shlvl = env_get(sh->env, "SHLVL");
@@ -29,8 +28,6 @@ void	shell_upadate(t_shell *sh)
 	new_shlvl = ft_itoa(lvl);
 	env_set(sh->env, "SHLVL", new_shlvl);
 	env_set(sh->env, "SHELL", "minishell");
-	title = parse_ps1(sh->env, "%u@minishell:%d");
-	set_terminal_title(title);
-	free(title);
+	update_title(sh);
 	free(new_shlvl);
 }

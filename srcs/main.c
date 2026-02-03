@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/02/02 17:34:12 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/03 12:03:21 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	run_interactive_shell(t_shell *sh)
 		if (*line)
 			add_history(line);
 		input(line, sh);
+		update_title(sh);
 		free(line);
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}
