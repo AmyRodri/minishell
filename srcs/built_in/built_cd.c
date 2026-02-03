@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:48:48 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:19:06 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/03 16:48:54 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	cd(t_env_table *env, t_cmd *cmd)
 {
 	if (!cmd->argv[1] || !ft_strcmp(cmd->argv[1], "~"))
 		return (cd_home(env));
+	if (cmd->argc != 2)
+		return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
 	else if (!ft_strcmp(cmd->argv[1], "-"))
 		return (cd_dash(env));
 	else
