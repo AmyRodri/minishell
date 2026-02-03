@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:17:23 by kamys             #+#    #+#             */
-/*   Updated: 2026/02/03 12:03:21 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/03 12:24:56 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ static void	input(char	*line, t_shell *sh)
 {
 	t_token	*token;
 
+	if (*line)
+		add_history(line);
+	if (get_signal() == SIGINT)
+		sh->last_status = 128 + SIGINT;
 	reset_signal();
 	token = lexer(line);
 	if (!token)
@@ -59,8 +63,6 @@ static void	run_interactive_shell(t_shell *sh)
 		free(prompt);
 		if (!line && exit_coder(sh))
 			break ;
-		if (*line)
-			add_history(line);
 		input(line, sh);
 		update_title(sh);
 		free(line);
