@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/01/27 14:23:44 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:19:12 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,6 @@ static int	execute_builtin(t_cmd *cmd, t_shell *sh)
 	return (127);
 }
 
-static void	restore_fds(int in, int out)
-{
-	dup2(in, STDIN_FILENO);
-	dup2(out, STDOUT_FILENO);
-	close(in);
-	close(out);
-}
-
 static int	exec_builtin_with_redirect(t_cmd *cmd, t_shell *sh)
 {
 	int	status;
@@ -70,6 +62,16 @@ static int	exec_builtin_with_redirect(t_cmd *cmd, t_shell *sh)
 	status = execute_builtin(cmd, sh);
 	restore_fds(stdin_bakcup, stdout_bakcup);
 	return (status);
+}
+
+static void	sig_handler_cmd(int sig)
+{
+	if (sig == SIGINT)
+	{
+		(void)sig;
+		set_signal_int();
+		write(STDIN_FILENO, "\n", 1);
+	}
 }
 
 int	execute_cmd(t_ast *cmd_node, t_shell *sh)
@@ -92,7 +94,9 @@ int	execute_cmd(t_ast *cmd_node, t_shell *sh)
 		ft_putstr_fd("' : command not found\n", 2);
 		return (127);
 	}
+	signal(SIGINT, sig_handler_cmd);
 	status = exec_simple_command(cmd->redir, path_cmd, cmd->argv, sh->env);
+	setup_sig();
 	env_set(sh->env, "_", path_cmd);
 	free(path_cmd);
 	return (status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 12:58:03 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/02/03 17:12:40 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/04 16:17:50 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 
 static int	ft_atoll_safe(const char *s, long long *out)
 {
-	long long	res = 0;
-	int			sign = 1;
+	long long	res;
+	int			sign;
 
+	res = 0;
+	sign = 1;
 	if (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
@@ -31,18 +33,14 @@ static int	ft_atoll_safe(const char *s, long long *out)
 	{
 		if (!ft_isdigit(*s))
 			return (0);
-
 		if (res > (LLONG_MAX - (*s - '0')) / 10)
 			return (0);
-
 		res = res * 10 + (*s - '0');
 		s++;
 	}
 	*out = res * sign;
 	return (1);
 }
-
-
 
 static int	normalize_exit_code(long long n)
 {

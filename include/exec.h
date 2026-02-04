@@ -6,7 +6,7 @@
 /*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:32:19 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/02 18:19:57 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:19:37 by amyrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ char	*expand_variables_in_heredoc(char *line, t_shell *sh);
 int		handle_cmd_heredocs(void *content, t_shell *sh);
 int		traverse_ast_heredoc(t_ast *node, t_shell *sh);
 void	close_free(int fd, char *tmp);
+void	restore_fds(int in, int out);
 
 #endif
