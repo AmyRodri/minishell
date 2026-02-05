@@ -6,22 +6,18 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 14:37:31 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/02/04 23:23:21 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/04 23:59:23 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	check_borders(t_token *tokens)
+static int	check_borders(t_token *tokens)
 {
 	t_token	*head;
 
 	head = tokens;
-	if (token_op(head->type)
-		&& head->type != TK_HEREDOC
-		&& head->type != TK_APPEND
-		&& head->type != TK_REDIR_IN
-		&& head->type != TK_REDIR_OUT)
+	if (is_logic_op(head->type) && !is_redir(head->type))
 	{
 		printf("Syntax %s : error\n", head->value);
 		return (1);
@@ -36,20 +32,26 @@ int	check_borders(t_token *tokens)
 	return (0);
 }
 
-int	check_next_token(t_token *tokens)
+static int	check_next_token(t_token *tokens)
 {
-	if (token_op(tokens->type))
+	if (!tokens->next)
+		return (0);
+	if (is_logic_op(tokens->type)
+		&& is_logic_op(tokens->next->type))
 	{
-		if (token_op(tokens->next->type))
-		{
-			printf("Syntax %s : error\n", tokens->next->value);
-			return (1);
-		}
+		printf("Syntax %s : error\n", tokens->next->value);
+		return (1);
+	}
+	if (is_redir(tokens->type)
+		&& token_op(tokens->next->type))
+	{
+		printf("Syntax %s : error\n", tokens->next->value);
+		return (1);
 	}
 	return (0);
 }
 
-t_token	*check_paren(t_token *tokens)
+static t_token	*check_paren(t_token *tokens)
 {
 	int	depth;
 
@@ -73,7 +75,7 @@ t_token	*check_paren(t_token *tokens)
 	return (NULL);
 }
 
-int	handle_paren_open(t_token **head_ptr)
+static int	handle_paren_open(t_token **head_ptr)
 {
 	t_token	*end;
 	t_token	*head;

@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:40:05 by kamys             #+#    #+#             */
-/*   Updated: 2026/02/04 23:24:43 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/04 23:56:45 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ void						add_redir_back(t_redir **list, t_redir *new);
 t_redir						*redirs(t_token **tokens, t_token_type type);
 t_ast						*new_node(t_node_type type, t_ast *left,
 								t_ast *right, void *content);
+int							is_redir(t_token_type type);
+int							is_logic_op(t_token_type type);
 
 #endif

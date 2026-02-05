@@ -67,6 +67,7 @@ SRCS_BUILT	= built_env.c			\
 SRCS_PARSER = parser.c				\
 			  parser_syntax.c		\
 			  parser_utils.c		\
+			  parser_utils2.c		\
 			  parse_and.c			\
 			  parse_command.c		\
 			  parse_or.c			\
