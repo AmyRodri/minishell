@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:36:20 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/02 18:34:57 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/05 00:24:33 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	execute_ast(t_ast *root, t_shell *sh)
 	return (1);
 }
 
-static void	exec_child(char *path_cmd, char **av, t_env_table *env)
+void	exec_child(char *path_cmd, char **av, t_env_table *env)
 {
 	execve(path_cmd, av, env_export(env));
 	ft_putstr_fd("Minishell: ", 2);

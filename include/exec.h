@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 02:32:19 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/04 23:26:02 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/05 01:33:44 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,14 @@ int		traverse_ast_heredoc(t_ast *node, t_shell *sh);
 void	close_free(int fd, char *tmp);
 void	restore_fds(int in, int out);
 void	sig_handler_cmd(int sig);
+int		is_builtin(char **av);
+int		execute_builtin(t_cmd *cmd, t_shell *sh);
+void	exec_child(char *path_cmd, char **av, t_env_table *env);
+int		exec_builtin_pipeline(t_cmd *cmd, t_shell *sh);
+int		count_pipe_cmds(t_ast *node);
+void	collect_pipe_cmds(t_ast *node, t_ast **arr, int *i);
+void	exec_pipe_child(t_ast *node, t_ast **cmds, t_shell *sh);
+void	parent_pipe_cleanup(int *prev_fd, int fd[2], int i, int n);
+void	exec_cmd_in_pipeline(t_ast *node, t_shell *sh);
 
 #endif

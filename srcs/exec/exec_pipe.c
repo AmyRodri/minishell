@@ -3,57 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:26:40 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/02 18:00:17 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/05 01:33:36 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	close_fd(int fd1, int fd2)
+void	exec_cmd_in_pipeline(t_ast *node, t_shell *sh)
 {
-	if (fd1)
-		close(fd1);
-	if (fd2)
-		close(fd2);
+	t_cmd	*cmd;
+	char	*path;
+
+	cmd = node->content;
+	expand_cmd(cmd, sh);
+	if (cmd->redir)
+		if (apply_redirect(cmd->redir) < 0)
+			exit(1);
+	if (is_builtin(cmd->argv))
+		exit(exec_builtin_pipeline(cmd, sh));
+	path = resolve_path(cmd->argv[0], sh->env);
+	if (!path)
+	{
+		ft_putstr_fd("Minishell: '", 2);
+		ft_putstr_fd(cmd->argv[0], 2);
+		ft_putstr_fd("' : command not found\n", 2);
+		free_ast(sh->root);
+		clean_up(sh);
+		exit(127);
+	}
+	exec_child(path, cmd->argv, sh->env);
 }
 
-static int	execute_and_free(t_ast *root, t_shell *sh)
+static void	child_pipe_setup(int prev_fd, int fd[2], int i, int n)
 {
-	int		ret;
-
-	ret = execute_ast(root, sh);
-	free_ast(sh->root);
-	clean_up(sh);
-	return (ret);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	if (prev_fd != -1)
+	{
+		dup2(prev_fd, STDIN_FILENO);
+		close(prev_fd);
+	}
+	if (i < n - 1)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+	}
 }
 
-int	handle_pipe(t_ast *root, t_shell *sh)
+static void	wait_pipeline(pid_t last_pid, t_shell *sh)
 {
-	int		fd[2];
-	pid_t	pid[2];
+	pid_t	pid;
 	int		status;
 
-	if (pipe(fd) == -1)
-		return (1);
-	pid[0] = fork();
-	if (pid[0] == 0)
+	pid = wait(&status);
+	while (pid > 0)
 	{
-		dup2(fd[1], STDOUT_FILENO);
-		close_fd(fd[0], fd[1]);
-		exit(execute_and_free(root->left, sh));
+		if (pid == last_pid)
+			sh->last_status = status;
+		pid = wait(&status);
 	}
-	pid[1] = fork();
-	if (pid[1] == 0)
+}
+
+static pid_t	run_pipeline(t_ast **cmds, int n, t_shell *sh)
+{
+	int		i;
+	int		prev_fd;
+	int		fd[2];
+	pid_t	pid;
+	pid_t	last_pid;
+
+	i = 0;
+	prev_fd = -1;
+	last_pid = -1;
+	while (i < n)
 	{
-		dup2(fd[0], STDIN_FILENO);
-		close_fd(fd[0], fd[1]);
-		exit(execute_and_free(root->right, sh));
+		if (i < n - 1 && pipe(fd) < 0)
+			break ;
+		pid = fork();
+		if (pid == 0)
+		{
+			child_pipe_setup(prev_fd, fd, i, n);
+			exec_pipe_child(cmds[i], cmds, sh);
+		}
+		parent_pipe_cleanup(&prev_fd, fd, i, n);
+		last_pid = pid;
+		i++;
 	}
-	close_fd(fd[0], fd[1]);
-	waitpid(pid[0], &status, 0);
-	waitpid(pid[1], &status, 0);
-	return (WEXITSTATUS(status));
+	return (last_pid);
+}
+
+int	handle_pipe(t_ast *pipe_node, t_shell *sh)
+{
+	t_ast	**cmds;
+	int		n;
+	int		i;
+	pid_t	last_pid;
+
+	n = count_pipe_cmds(pipe_node);
+	cmds = malloc(sizeof(t_ast *) * n);
+	i = 0;
+	collect_pipe_cmds(pipe_node, cmds, &i);
+	signal(SIGINT, sig_handler_cmd);
+	signal(SIGQUIT, SIG_IGN);
+	last_pid = run_pipeline(cmds, n, sh);
+	wait_pipeline(last_pid, sh);
+	free(cmds);
+	setup_sig();
+	return (WEXITSTATUS(sh->last_status));
 }

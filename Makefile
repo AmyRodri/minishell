@@ -78,6 +78,7 @@ SRCS_PARSER = parser.c				\
 SRCS_EXEC	= exec.c				\
 			  exec_cmd.c			\
 			  exec_redirect.c		\
+			  exec_pipe_utils.c		\
 			  exec_pipe.c			\
 			  exec_and.c			\
 			  exec_or.c				\

@@ -6,13 +6,13 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/04 23:35:07 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/05 00:23:40 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static int	is_builtin(char **av)
+int	is_builtin(char **av)
 {
 	if (!av || !av[0])
 		return (0);
@@ -25,7 +25,7 @@ static int	is_builtin(char **av)
 	return (0);
 }
 
-static int	execute_builtin(t_cmd *cmd, t_shell *sh)
+int	execute_builtin(t_cmd *cmd, t_shell *sh)
 {
 	if (ft_strcmp(cmd->argv[0], "cd") == 0)
 		return (cd(sh->env, cmd));
