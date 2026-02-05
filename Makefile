@@ -73,19 +73,7 @@ SRCS_PARSER = parser.c				\
 			  parse_or.c			\
 			  parse_pipe.c			\
 			  parse_sequence.c		\
-			  parse_subshell.c	
-
-SRCS_EXEC	= exec.c				\
-			  exec_cmd.c			\
-			  exec_redirect.c		\
-			  exec_pipe_utils.c		\
-			  exec_pipe.c			\
-			  exec_and.c			\
-			  exec_or.c				\
-			  exec_path.c			\
-			  exec_sub.c			\
-			  exec_seq.c			\
-			  exec_utils.c			
+			  parse_subshell.c		
 
 SRCS_PROMPT	= prompt_init.c			\
 			  prompt_expand.c		\
@@ -113,6 +101,7 @@ SRCS_ALIAS	= alias_init.c			\
 SRCS_EXEC	= exec.c				\
 			  exec_cmd.c			\
 			  exec_redirect.c		\
+			  exec_pipe_utils.c		\
 			  exec_pipe.c			\
 			  exec_and.c			\
 			  exec_or.c				\
@@ -122,12 +111,7 @@ SRCS_EXEC	= exec.c				\
 			  exec_utils.c			\
 			  exec_heredoc.c		\
 			  exec_heredoc_utils.c	\
-			  exec_heredoc_utils2.c
-
-SRCS_ALIAS	= alias_init.c			\
-			  alias_export.c		\
-			  alias_new.c			\
-			  alias_table.c				
+			  exec_heredoc_utils2.c		
 
 # Add directory prefix
 SRCS_ALIAS	:= $(addprefix $(SRCSDIR)/$(ALIASDIR)/, $(SRCS_ALIAS))
