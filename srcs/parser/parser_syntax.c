@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 14:37:31 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/02/03 18:08:52 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/04 23:23:21 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int	check_borders(t_token *tokens)
 	t_token	*head;
 
 	head = tokens;
-	if (token_op(head->type) && head->type != TK_HEREDOC)
+	if (token_op(head->type)
+		&& head->type != TK_HEREDOC
+		&& head->type != TK_APPEND
+		&& head->type != TK_REDIR_IN
+		&& head->type != TK_REDIR_OUT)
 	{
 		printf("Syntax %s : error\n", head->value);
 		return (1);

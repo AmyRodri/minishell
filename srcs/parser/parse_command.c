@@ -6,7 +6,7 @@
 /*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:16 by amyrodri          #+#    #+#             */
-/*   Updated: 2026/01/22 12:08:22 by kamys            ###   ########.fr       */
+/*   Updated: 2026/02/04 23:05:38 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,21 @@ t_ast	*new_node(t_node_type type, t_ast *left, t_ast *right, void *content)
 
 t_ast	*parse_command(t_token **tokens)
 {
-	t_token_type	type;
 	t_cmd			*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
-	while (*tokens)
+	while (*tokens && !is_stop_token((*tokens)->type))
 	{
-		type = (*tokens)->type;
-		if (is_stop_token(type))
-			break ;
-		if (type == TK_REDIR_IN || type == TK_REDIR_OUT
-			|| type == TK_APPEND || type == TK_HEREDOC)
-		{
-			add_redir_back(&cmd->redir, redirs(tokens, type));
-			continue ;
-		}
-		if (type == TK_WORD)
-		{
+		if ((*tokens)->type == TK_WORD)
 			add_word_arg(cmd, tokens);
-			continue ;
-		}
+		else if ((*tokens)->type == TK_REDIR_IN
+			|| (*tokens)->type == TK_REDIR_OUT
+			|| (*tokens)->type == TK_APPEND
+			|| (*tokens)->type == TK_HEREDOC)
+			add_redir_back(&cmd->redir,
+				redirs(tokens, (*tokens)->type));
+		else
+			break ;
 	}
 	cmd->alias_expanded = 0;
 	return (new_node(NODE_CMD, NULL, NULL, cmd));

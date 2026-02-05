@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amyrodri <amyrodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kamys <kamys@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:15:03 by cassunca          #+#    #+#             */
-/*   Updated: 2026/02/04 16:19:12 by amyrodri         ###   ########.fr       */
+/*   Updated: 2026/02/04 23:35:07 by kamys            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,20 @@ static int	exec_builtin_with_redirect(t_cmd *cmd, t_shell *sh)
 	return (status);
 }
 
-static void	sig_handler_cmd(int sig)
+static int	exec_redir_only(t_cmd *cmd)
 {
-	if (sig == SIGINT)
+	int	stdin_backup;
+	int	stdout_backup;
+
+	stdin_backup = dup(STDIN_FILENO);
+	stdout_backup = dup(STDOUT_FILENO);
+	if (cmd->redir)
 	{
-		(void)sig;
-		set_signal_int();
-		write(STDIN_FILENO, "\n", 1);
+		if (apply_redirect(cmd->redir) < 0)
+			return (restore_fds(stdin_backup, stdout_backup), 1);
 	}
+	restore_fds(stdin_backup, stdout_backup);
+	return (0);
 }
 
 int	execute_cmd(t_ast *cmd_node, t_shell *sh)
@@ -81,13 +87,15 @@ int	execute_cmd(t_ast *cmd_node, t_shell *sh)
 	int		status;
 
 	cmd = (t_cmd *)cmd_node->content;
+	if (cmd && cmd->redir && (!cmd->argv || !cmd->argv[0]))
+		return (exec_redir_only(cmd));
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
 	expand_cmd(cmd, sh);
 	if (is_builtin(cmd->argv))
 		return (exec_builtin_with_redirect(cmd, sh));
 	path_cmd = resolve_path(cmd->argv[0], sh->env);
-	if (!path_cmd || !cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
+	if (!path_cmd || cmd->argv[0][0] == '\0')
 	{
 		ft_putstr_fd("Minishell: '", 2);
 		ft_putstr_fd(cmd->argv[0], 2);
@@ -98,6 +106,5 @@ int	execute_cmd(t_ast *cmd_node, t_shell *sh)
 	status = exec_simple_command(cmd->redir, path_cmd, cmd->argv, sh->env);
 	setup_sig();
 	env_set(sh->env, "_", path_cmd);
-	free(path_cmd);
-	return (status);
+	return (free(path_cmd), status);
 }
